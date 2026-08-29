@@ -384,6 +384,7 @@
 600 tab1: cls: invers=1:print a$;:nrmal=1
 600 tab1: invers=1:print a$;:nrmal=1
 600 invers=1:print a$;:nrmal=1
+600 invers=1:print a$:nrmal=1
 601 print "    records of high & low prices":invers=1:print a$;:nrmal=1:print
 602 print "    records by p)ort or i)tem? "
 603 print "    =========================="
@@ -415,17 +416,19 @@
 640 ifh(x,i)=0thenprint" ?";:inv=1:printtab(30)" ";:nrmal=1:print"   ?":nexti
 640 ifh(x,i)=0thenprint" ?";:inv=1:locatei+3,30:print" ";:nrmal=1:print"   ?":nexti
 640 ifh(x,i)=0thenprint" ?";:inv=1:print" ";:nrmal=1:print"   ?":nexti
-640 if h(x,i)=0 then print" ?";:inv=1:print tab(30)" ";:nrmal=1:print"   ?":nexti
+640 if h(x,i)=0 then print" ?";:inv=1:print tab(30)" ";:nrmal=1:print"   ?":next i
 641 ifh(x,i)<>0thenprinttab(21);h(x,i);:printtab(30);" ";:print" ";l(x,i):nexti
 641 ifh(x,i)<>0thenlocatei+3,21:printh(x,i);:locatei+3,30:print" ";:print" ";l(x,i):nexti
 641 ifh(x,i)<>0thenlocatei+3,21:printh(x,i);:print" ";:print" ";l(x,i):nexti
 641 if h(x,i)<>0then print tab(21);h(x,i);:print tab(30);" ";:print" ";l(x,i):nexti
+641 if h(x,i)<>0then print tab(21);h(x,i);:print tab(30);" ";:print" ";l(x,i):next i
 
 640 ifh(x,i)=0thenprint" ?";:inv=1:locatei+3,30:print" ";
 640 ifh(x,i)=0thenprint" ?";:inv=1:print" ";
 640 if h(x,i)=0thenprint" ?";:inv=1:print tab(30)" ";
 640 if h(x,i)=0 then print" ?";:inv=1:print tab(30)" ";
 641 if h(x,i)=0then nrmal=1:print"   ?":nexti
+641 if h(x,i)=0then nrmal=1:print"   ?":next i
 
 642 ifh(x,i)<>0thenlocatei+3,21:printh(x,i);
 642 ifh(x,i)<>0thenprinth(x,i);
@@ -749,14 +752,18 @@
 1054 ifid=1andrnd(1)>.95thenif tr = 0 then 1070
 
 1051 dice = id=1andrnd(1)>.95
+1051 dice = id=1 and rnd(1)>.95
 1052 ifdicethenlocate19:print b$;:print tab(1)" ";ly$;
 1052 ifdicethenlocate19,1:print b$;:print tab(1)" ";ly$;
 1052 ifdicethentab19:print b$;:print tab(1)" ";ly$;
 1052 if dice then print b$;:print tab(1)" ";ly$;
 1052 if dice then print b$;:print " ";ly$;
 1053 ifdicethenprint"'s fleet drove 'em off!":gosub6100
+1053 if dice then print"'s fleet drove 'em off!":gosub 6100
 1054 ifdicethenp=p*int(rnd(1)*10)+6:id=2:gosub 5290:gosub 1100
+1054 if dice then p=p*int(rnd(1)*10)+6:id=2:gosub 5290:gosub 1100
 1055 ifdicethenif tr = 0 then 1070
+1055 if dice then if tr = 0 then 1070
 
 1060 ifid=2andtr=1thenlocate19:print "they greet us, and sail off.    "
 1060 ifid=2andtr=1thenlocate19,1:print "they greet us, and sail off.    "
@@ -809,6 +816,7 @@
 1090 ifsr<.1thengosub780: locate19,1:print " we're going under, taipan!      "
 1090 ifsr<.1thengosub780: print " we're going under, taipan!      "
 1090 if sr<.1 then gosub780: print " we're going under, taipan!      "
+1090 if sr<.1 then gosub 780: print " we're going under, taipan!      "
 1091 ifsr<.1thengosub 6290:x$= "":goto 1300
 1091 if sr<.1 then gosub 6290:x$= "":goto 1300
 
@@ -821,6 +829,7 @@
 1100 invers=1:printa$;:nrmal=1:print" guns: ";g;"         repair:";
 1100 invers=1:print a$;:nrmal=1:print" guns: ";g;"         repair:";
 1101 if sr<0thensr=0
+1101 if sr<0then sr=0
 1110 print int (sr * 100);"%  ":print "ships encountered:";p;"       "
 1111 print a$;:print a$;:print a$;:return
 1120 locate19:print " shall we r)un, f)ight, or p)arley?": gosub 60
@@ -835,6 +844,7 @@
 1130 on x goto 1140,1160,1200
 
 1140 if sr<=rnd(1)andint(rnd(1)*6)+1 < = int ( rnd (1) * p) + 1 then 1150
+1140 if sr<=rnd(1) and int(rnd(1)*6)+1 < = int ( rnd (1) * p) + 1 then 1150
 1141 if sr>rnd(1) and int(rnd(1) * 6) + 1 > int ( rnd (1) * p) + 1 then 1143
 1142 goto 1150
 1143 gosub 6220: locate18:print "we escaped from 'em taipan!         "
@@ -845,12 +855,17 @@
 
 
 1150 dice=sr>rnd(1)andrnd(1)>.6
+1150 dice=sr>rnd(1) and rnd(1)>.6
 1151 ifdicethenp=p-int(int((rnd(1)*p)+1)/2):gosub6220
+1151 if dice then p=p-int(int((rnd(1)*p)+1)/2):gosub 6220
 1152 ifdicethengosub 5290:locate19:print p;
 1152 ifdicethengosub 5290:locate19,1:print p;
 1152 ifdicethengosub 5290:print p;
+1152 if dice then gosub 5290:print p;
 1153 ifdicethenprint" of 'em still with us!                         "
+1153 if dice then print" of 'em still with us!                         "
 1154 ifdicethengosub 780: gosub 1100: goto 1050
+1154 if dice then gosub 780: gosub 1100: goto 1050
 
 
 1155 locate19:print " can't shake 'em!                               "
@@ -864,6 +879,7 @@
 1161 dice=int(rnd(1)*(g+1))+1>int(rnd(1)*4)
 1162 if dice then locate19:print b$;:printtab(1) "hit 'em!"
 1162 if dice then locate19:print b$;:print "hit 'em!"
+1162 if dice then print b$;:print "hit 'em!"
 1163 if dice then gosub 5680:goto 1170
 1168 locate19:print " missed 'em!                        "
 1168 locate19,1:print " missed 'em!                        "
@@ -871,6 +887,7 @@
 1169 gosub 780: goto 1190
 1170 nk = rnd (1)
 1171 if nk > .4 then if p >= g thenx = int(int((rnd(1)*(g-1))+1)/3) + 1
+1171 if nk > .4 then if p >= g then x = int(int((rnd(1)*(g-1))+1)/3) + 1
 1172 if nk > .4 and p < g then x = int ( rnd (1) * p)+1
 
 
