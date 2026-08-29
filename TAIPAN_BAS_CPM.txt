@@ -142,6 +142,7 @@
 222 for i = 0 to 4 step 2: locate 13 + i / 2,1:print g$(i);
 222 for i = 0 to 4 step 2: print g$(i);
 222 for i = 0 to 4 step 2: print tab(1) g$(i);
+222 for i = 0 to 4 step 2: print g$(i);
 223 locate13 + i / 2,10:print gp(i);:locate13 + i / 2,21:print g$(i + 1);
 223 print gp(i);:locate13 + i / 2,21:print g$(i + 1);
 223 print gp(i);:TAB 21:print g$(i + 1);
@@ -254,6 +255,7 @@
 390 gosub130:locate13,1:printa$:locate13,1:print "cargo <t>o or <f>rom godown?"
 390 gosub130:printa$:print "cargo <t>o or <f>rom godown?"
 390 gosub130:print a$:print "cargo <t>o or <f>rom godown?"
+390 gosub 130:print a$:print "cargo <t>o or <f>rom godown?"
 391 print a$;:gosub 60:if x$= "t" then 410
 392 if x$="f" then 440
 393 if x$<> "t" and x$ <> "f" then gosub 770: goto 390
@@ -275,6 +277,7 @@
 425 rem tab(1)
 430 if num > sg(x1) then locate 13: print " only ";:q = sg(x1):gosub 1330
 430 if num > sg(x1) then tab 13: print " only ";:q = sg(x1):gosub 1330
+430 if num > sg(x1) then print " only ";:q = sg(x1):gosub 1330
 431 if num > sg(x1) then print tab(11);" units aboard!    ":gosub 760:goto 420
 
 432 ifnum<=sg(x1)then sg(x1)=sg(x1)-num:sh=sh+num:gg(x1)=gg(x1)+num:num$=""
@@ -282,14 +285,18 @@
 440 gosub 400
 441 ifgg(x1)=0thenlocate13:print" the godown has no ";g$(x1);".           "
 441 ifgg(x1)=0thentab13:print" the godown has no ";g$(x1);".           "
-442 if gg(x1) =0 then gosub 760:return
+441 if gg(x1) = 0 then print" the godown has no ";g$(x1);".           "
+442 if gg(x1) = 0 then gosub 760:return
 450 num$=""
 451 locate13:printb$;:printtab(1)" move how much ";g$(x1);" to ship? ";
 451 tab13:printb$;:printtab(1)" move how much ";g$(x1);" to ship? ";
+451 printb$;:printtab(1)" move how much ";g$(x1);" to ship? ";
+451 printb$;:print" move how much ";g$(x1);" to ship? ";
 452 gosub305:ifx$="a"thenprint chr$(8);:invers=1:print"all";:nrmal=1:num=gg(x1)
 453 if x$ <> "a" then num = val (num$)
 460 if num>gg(x1)then locate13:print" just ";:q=gg(x1):gosub1330
-460 if num>gg(x1)then tab13:print" just ";:q=gg(x1):gosub1330
+460 if num>gg(x1)then tab13:print" just ";:q=gg(x1):gosub 1330
+460 if num>gg(x1)then print" just ";:q=gg(x1):gosub 1330
 461 if num>gg(x1)then print " units stored!":gosub 760: goto 450
 
 462 if num < = gg(x1) then gg(x1) =gg(x1) - num: sg(x1) = sg(x1) + num
@@ -298,17 +305,24 @@
 465 rem lender subroutine (470-580)
 470 gosub 130:gosub 1340:locate12:
 470 gosub 130:gosub 1340:tab12:
+470 gosub 130:gosub 1340
 471 print "[wanchai district of hongkong: home of "; w$;"]":print w$;
 472 print " greets you, taipan, and wishes you well.":gosub 780
 473 locate14:print a$:print a$
 473 tab14:print a$:print a$
+473 print a$:print a$
 480 locate14:print "wu states that his iron lotus": 
 480 tab14:print "wu states that his iron lotus": 
+480 print "wu states that his iron lotus": 
 481 print "triad has been watching you.": gosub 780
 490 locate14: print a$: print a$: print a$:locate 14:print w$;
 490 tab14: print a$: print a$: print a$:tab14:print w$;
+490 print a$: print a$: print a$:tab14:print w$;
+490 print a$: print a$: print a$:print w$;
 491 print " asks, do you":print a$;:locate15
 491 print " asks, do you":print a$;:tab15
+491 print " asks, do you":print a$;
+491 print " asks, do you"
 492 print "wish to b)orrow, p)ay, or q)uit?    ";: num$ = ""
 500 gosub 60:if x$ = "b" then ld$ = "borrow": ld = 1
 501 if x$ = "p" then ld$ = "pay": ld = 2
@@ -316,34 +330,45 @@
 503 if x$ <> "b" and x$ <> "p" and x$ <> "q" then gosub 770: goto 500
 510 if ld = 1 and (b = 1 or d > 1e4) then gosub 1340: locate15
 510 if ld = 1 and (b = 1 or d > 1e4) then gosub 1340: tab15
+510 if ld = 1 and (b = 1 or d > 1e4) then gosub 1340
 511 if ld = 1 and (b = 1 or d > 1e4) thenprint"wu regrets that he cannot loan":
+511 if ld = 1 and (b = 1 or d > 1e4) then print"wu regrets that he cannot loan":
 512 if ld = 1 and (b = 1 or d > 1e4) thenprint"you more at this time, taipan.";
+512 if ld = 1 and (b = 1 or d > 1e4) then print"you more at this time, taipan.";
 513 if ld = 1 and (b = 1 or d > 1e4) then gosub 760:goto 490
 
 520 gosub 1340: locate15:print "how much do you wish to ";ld$;","
 520 gosub 1340: tab15:print "how much do you wish to ";ld$;","
+520 gosub 1340: print "how much do you wish to ";ld$;","
 521 print "taipan? ";:gosub 305:num = val (num$)
 
 
 530 ifx$="a"andld=1thenprintchr$(8);:invers=1:print"all";:nrmal=1:num=c*2
+530 if x$="a" and ld=1then print chr$(8);:invers=1:print"all";:nrmal=1:num=c*2
 532 ifx$="a"andld=2thenprintchr$(8);: invers=1:print "all";: nrmal=1:num = d
+532 if x$="a" and ld=2then print chr$(8);: invers=1:print "all";: nrmal=1:num = d
 540 if ld = 2 then 560
 541 if num>2*c then locate15:print a$:locate15:print w$;" regrets that he"
 541 if num>2*c then tab15:print a$:tab15:print w$;" regrets that he"
+541 if num>2*c then print a$:print w$;" regrets that he"
 542 if num>2*c then print "cannot loan you that much.";: gosub 760:goto 490
 550 b=1:c = c + num:d = d + num: gosub 130: goto 490
 560 if num > c then num = c: d = d - c:c=0:gosub 130:locate 15:print w$;
 560 if num > c then num = c: d = d - c:c=0:gosub 130:tab 15:print w$;
+560 if num > c then num = c: d = d - c:c=0:gosub 130:print w$;
 561 if num > c then print" thanks you,":print "taipan, for the payment.";
 562 if num > c then gosub 780:if d < 0 then d = 0:gosub 130:goto 490
 563 if num > c and d > = 0 then gosub 130: goto 490
 570 if num > d then d = 0: c = c - num:locate 15:print w$;
 570 if num > d then d = 0: c = c - num:tab 15:print w$;
+570 if num > d then d = 0: c = c - num:print w$;
 571 if num > d then print" thanks you for your startling generosity!";
 572 if num > d then gosub 130:gosub 780:goto 490
 580 c = c - num: d = d - num:gosub 130: locate 15
 580 c = c - num: d = d - num:gosub 130: tab 15
+580 c = c - num: d = d - num:gosub 130
 581 printw$;" accepts your payment with gratitude, taipan";:gosub 780:goto 490
+581 print w$;" accepts your payment with gratitude, taipan";:gosub 780:goto 490
 
 585 rem randomizer subroutine (590-591)
 590 locate15,8:print "press <";:flsh=1:print"spacebar";:nrmal=1
@@ -466,6 +491,7 @@
 725 rem embark (730-751)
 730 if sh < 0 then locate13:print "your ship is overloaded, taipan         ";
 730 if sh < 0 then tab13:print "your ship is overloaded, taipan         ";
+730 if sh < 0 then print "your ship is overloaded, taipan         ";
 731 if sh < 0 then print a$:gosub 760:goto 360
 732 if sh >= 0 then cls: print tab( 11);:invers=1:print "embarking":nrmal=1
 732 if sh >= 0 then print tab( 11);:invers=1:print "embarking":nrmal=1
@@ -512,6 +538,7 @@
 795 gosub 1340: locate 12:print " a broker offers to take your"
 795 gosub 1340: tab 12:print " a broker offers to take your"
 795 gosub 1340: print tab(12) " a broker offers to take your"
+795 gosub 1340: print " a broker offers to take your"
 796 print "vessel in trade for one with":printgn+g;" guns & ";x+mw;" capacity"
 
 
@@ -521,12 +548,15 @@
 801 gosub 60:locate12
 801 gosub 60:tab(12)
 801 gosub 60:print tab(12);
+801 gosub 60:print;
+801 gosub 60
 802 if x$ = "y" then c = c - xp:sh = sh + x:mw = mw + x:g = g + gn: gosub 130
 805 gosub 1340
 810 ifc>dandd>2000andrnd(1)>.7thengosub 1340:locate 12
 810 ifc>dandd>2000andrnd(1)>.7thengosub 1340:tab 12
 810 if c>d and d>2000 and rnd(1)>.7 then gosub 1340:tab 12
 810 if c>d and d>2000 and rnd(1)>.7 then gosub 1340:print tab(12);
+810 if c>d and d>2000 and rnd(1)>.7 then gosub 1340
 811 ifc>dandd>2000andrnd(1)>.7thenprint"you've been attacked and robbed by ";
 811 if c>d and d>2000 and rnd(1)>.7then print"you've been attacked and robbed by ";
 812 ifc>dandd>2000andrnd(1)>.7thenprint"iron lotus ruffians, taipan!" ; 
@@ -540,17 +570,19 @@
 811 ifdicethengosub 1340:locate 12
 811 ifdicethengosub 1340:tab 12
 811 if dice then gosub 1340:tab 12
+811 if dice then gosub 1340
 812 ifdicethenprint"you've been attacked and robbed by ";
 812 if dice then print"you've been attacked and robbed by ";
 813 ifdicethenprint"iron lotus ruffians, taipan!";:c=int(c/3):gosub760:gosub130
 813 if dicethenprint"iron lotus ruffians, taipan!";:c=int(c/3):gosub760:gosub130
-813 if dice then print"iron lotus ruffians, taipan!";:c=int(c/3):gosub760:gosub130
+813 if dice then print"iron lotus ruffians, taipan!";:c=int(c/3):gosub 760:gosub 130
 
 820 gosub 180: gosub 860: gosub 190:gosub 1340:dn = int ((c / 2) * rnd (1))
 821 ifrnd(1)>.8andtr=0andl<>0thenlocate12:print"a messenger from ";ly$;
 821 ifrnd(1)>.8andtr=0andl<>0thentab12:print"a messenger from ";ly$;
 821 if rnd(1)>.8 and tr=0 and l<>0 then tab12:print"a messenger from ";ly$;
 821 if rnd(1)>.8 and tr=0 and l<>0 then print tab(12)"a messenger from ";ly$;
+821 if rnd(1)>.8 and tr=0 and l<>0 then print "a messenger from ";ly$;
 822 ifrnd(1)>.8andtr=0andl<>0thenprint" asks"
 822 if rnd(1)>.8 and tr=0 and l<>0 then print" asks"
 823 ifrnd(1)>.8andtr=0andl<>0thenprint "that you return to hong kong"
@@ -565,6 +597,7 @@
 822 ifdicethentab12:print"a messenger from ";ly$;" asks"
 822 if dice then tab12:print"a messenger from ";ly$;" asks"
 822 if dice then print tab(12)"a messenger from ";ly$;" asks"
+822 if dice then print "a messenger from ";ly$;" asks"
 823 ifdicethenprint "that you return to hong kong"
 823 if dice then print "that you return to hong kong"
 
@@ -589,7 +622,7 @@
 845 ifc>0andtr=0andl=0thenifx$="y"thenprint:print a$;
 846 ifc>0andtr=0andl=0thenifx$<>"y"thengosub1340: locate12:print" ":print" ";
 846 ifc>0andtr=0andl=0thenifx$<>"y"thengosub1340: tab12:print" ":print" ";
-846 ifc>0andtr=0andl=0thenifx$<>"y"thengosub1340: print" ":print" ";
+846 ifc>0andtr=0andl=0thenifx$<>"y"thengosub 1340: print" ":print" ";
 847 ifc>0andtr=0andl=0thenifx$<>"y"thenprintys$;" depart"
 848 ifc>0andtr=0andl=0thenifx$<>"y"thenprint "abruptly in a chilly silence."
 849 ifc>0andtr=0andl=0thenifx$<>"y"thenprint a$;
@@ -662,12 +695,14 @@
 990 if rnd (1) > .5 then 1030
 991 locate 13,1: print b$;:print tab(1) " storm, taipan!" : gosub 760
 991 print b$;:print tab(1) " storm, taipan!" : gosub 760
+991 print b$;:print " storm, taipan!" : gosub 760
 1000 if rnd (1) > .2 then 1020
 1001 locate 14:print " any port in a storm,                 ": gosub 760
 1001 tab 14:print " any port in a storm,                 ": gosub 760
 1001 print " any port in a storm,                 ": gosub 760
 1002 po = int ( rnd (1) * 10) :if po = l then locate 14
 1002 po = int ( rnd (1) * 10) :if po = l then tab 14
+1002 po = int ( rnd (1) * 10) :if po = l then REM tab 14
 1003 print " we can't make it,                      taipan,            "
 1004 sr = 0:goto 1090
 1010 locate 14
@@ -701,12 +736,14 @@
 1041 ifid<>1thenlocate19,1:print b$;:printtab(1);" there's ";ly$;"'s banner!"
 1041 ifid<>1thentab19:print b$;:printtab(1);" there's ";ly$;"'s banner!"
 1041 if id<>1 then print b$;:printtab(1);" there's ";ly$;"'s banner!"
+1041 if id<>1 then print b$;:print" there's ";ly$;"'s banner!"
 1042 if id<>1 then gosub 780
 1050 gosub 1100
 1051 ifid=1andrnd(1)>.95thenlocate19:print b$;:print tab(1)" ";ly$;
 1051 ifid=1andrnd(1)>.95thenlocate19,1:print b$;:print tab(1)" ";ly$;
 1051 ifid=1andrnd(1)>.95thentab19:print b$;:print tab(1)" ";ly$;
 1051 if id=1 and rnd(1)>.95then print b$;:print tab(1)" ";ly$;
+1051 if id=1 and rnd(1)>.95then print b$;:print " ";ly$;
 1052 ifid=1andrnd(1)>.95thenprint"'s fleet drove 'em off!":gosub6100
 1053 ifid=1andrnd(1)>.95thenp=p*int(rnd(1)*10)+6:id=2:gosub 5290:gosub 1100
 1054 ifid=1andrnd(1)>.95thenif tr = 0 then 1070
@@ -716,6 +753,7 @@
 1052 ifdicethenlocate19,1:print b$;:print tab(1)" ";ly$;
 1052 ifdicethentab19:print b$;:print tab(1)" ";ly$;
 1052 if dice then print b$;:print tab(1)" ";ly$;
+1052 if dice then print b$;:print " ";ly$;
 1053 ifdicethenprint"'s fleet drove 'em off!":gosub6100
 1054 ifdicethenp=p*int(rnd(1)*10)+6:id=2:gosub 5290:gosub 1100
 1055 ifdicethenif tr = 0 then 1070
@@ -732,6 +770,7 @@
 1070 ifcr=0andtr=0andid=2thencr=1:locate19,1:print b$;:printtab(1)" ";ys$;
 1070 ifcr=0andtr=0andid=2thencr=1:tab19:print b$;:printtab(1)" ";ys$;
 1070 if cr=0 and tr=0 and id=2 then cr=1:print b$;:printtab(1)" ";ys$;
+1070 if cr=0 and tr=0 and id=2 then cr=1:print b$;:print" ";ys$;
 1071 ifcr=0andtr=0andid=2thenprint" are cursing us!": gosub 780
 1071 if cr=0 and tr=0 and id=2 then print" are cursing us!": gosub 780
 1080 locate19:print "  they're firing on us!          ": gosub 5380
@@ -742,6 +781,7 @@
 1081 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thengosub5540:locate19,1:print b$;
 1081 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thengosub5540:tab19:print b$;
 1081 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then gosub5540:tab19:print b$;
+1081 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then gosub5540
 1082 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thenprinttab(1)" the buggers hit us!"
 1082 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then print " the buggers hit us!"
 1083 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thensr=sr-(rnd(1)/(mw/(int(rnd(1)*50)+1)))
@@ -823,7 +863,8 @@
 1160 print " we're firing on 'em!               ":gosub 5540
 1161 dice=int(rnd(1)*(g+1))+1>int(rnd(1)*4)
 1162 if dice then locate19:print b$;:printtab(1) "hit 'em!"
-1162 if dice then gosub 5680:goto 1170
+1162 if dice then locate19:print b$;:print "hit 'em!"
+1163 if dice then gosub 5680:goto 1170
 1168 locate19:print " missed 'em!                        "
 1168 locate19,1:print " missed 'em!                        "
 1168 print " missed 'em!                        "
@@ -904,6 +945,7 @@
 1252 if dice then locate19:print b$;:print tab(1);e;" of 'em ran away!"
 1252 if dice then locate19,1:print b$;:print tab(1);e;" of 'em ran away!"
 1252 if dice then print b$;:print tab(1);e;" of 'em ran away!"
+1252 if dice then print b$;:print e;" of 'em ran away!"
 1253 if dice then gosub 780:gosub 1100:gosub 5290:goto 1050
 1260 dice=rnd (1) > .7
 1261 if dice then locate19:print " they're preparing to attack!   "
@@ -1092,6 +1134,7 @@
 6310 for b = 1 to 100: next b
 6320 locate24, int ( rnd (1) * 40) + 1: print "o"
 6320 tab( rnd (1) * 40) + 1: print "o"
+6320 print tab( rnd (1) * 40) + 1 "o"
 
 
 6350 next a
