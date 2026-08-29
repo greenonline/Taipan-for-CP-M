@@ -16,7 +16,7 @@ This was really painless and took just an hour or two.
 
 The `.txt` file is test working evolving BASIC code, containing multiple verions of the same line.
 
-However, due to the nature of emulators, if you paste in the code, then only the last version of a particular line is accepted, so pasting in the mess of evolved code will actually result in a working program..!
+However, due to the nature of emulators (FWIW, I used `altairz80`), if you paste in the code, then only the last version of a particular line is accepted, so pasting in the mess of evolved code will actually result in a working program..!
 
 ### Clone `TAIPAN_BAS_PET.txt`
 
@@ -443,3 +443,44 @@ Much more logical to move the `NEXT I` to the end, remove from conditional:
 684 if l(i,x1)<>0 then print tab(31);" ";l(i,x1)
 685 next i
 ```
+
+#### Space after `GOSUB`
+
+```none
+390 gosub130:print a$:print "cargo <t>o or <f>rom godown?"
+390 gosub 130:print a$:print "cargo <t>o or <f>rom godown?"
+```
+
+#### Inherited bug: Duplicate line 1162
+
+```none
+1162 if dice then locate19:print b$;:printtab(1) "hit 'em!"
+1162 if dice then gosub 5680:goto 1170
+```
+
+should be
+
+```none
+1162 if dice then locate19:print b$;:printtab(1) "hit 'em!"
+1163 if dice then gosub 5680:goto 1170
+```
+
+Also in:
+
+ - `CommanderX16Taipan.bas`
+ - `TAIPAN_BAS_PET.txt`
+
+Not in:
+
+ - `TAIPAN_BAS_MMBASIC_playable.txt`
+
+## Finished?
+
+The game is now, more or less, playable.
+
+
+
+## TODO
+
+ - The blanking `A$` is not required as it is not a full screen version.
+ - Line 1162, check commodore version, check apple version
