@@ -10,6 +10,14 @@ This was really painless and took just an hour or two.
 
 ## Notes
 
+### Paste in the code!
+
+**IMPORTANT: This is still a WIP, and a "tidy" BASIC file is not yet complete.**
+
+The `.txt` file is test working evolving BASIC code, containing multiple verions of the same line.
+
+However, due to the nature of emulators, if you paste in the code, then only the last version of a particular line is accepted, so pasting in the mess of evolved code will actually result in a working program..!
+
 ### Clone `TAIPAN_BAS_PET.txt`
 
 The initial code to be used for MBASIC on CP/M is cloned from the Commodore PET version, `TAIPAN_BAS_PET.txt`.
