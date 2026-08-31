@@ -2,6 +2,8 @@
 
 Yet another Taipan port, this time for MBASIC on  CP/M
 
+The Applesoft BASIC code from the book,  [TAIPAN - A historical adventure for the Apple Computer (PDF)][1] by *Art Canfil*, *Karl Albrecht*, and *Jim McClenahan*, linked to from [taipangame.com][2].
+
 ## Preamble
 
 Another port of Taipan! Inspired by RC2014 hardware projects.
@@ -479,6 +481,21 @@ Not in:
 The game is now, more or less, playable.
 
 
+## See also
+
+ - [Taipan for BBC BASIC](https://gr33nonline.wordpress.com/2023/12/12/taipan-for-bbc-basic/)
+
+## Related
+
+ - [!!!NOT!!! TRS80Taipan](https://github.com/greenonline/TRS80Taipan)
+ - [MMBASICTaipan](https://github.com/greenonline/MMBASICTaipan)
+ - [MacTaipan](https://github.com/greenonline/MacTaipan)
+ - [Taipan_40_Column_Apple_II](https://github.com/greenonline/Taipan_40_Column_Apple_II)
+ - [CommanderX16Taipan](https://github.com/greenonline/CommanderX16Taipan)
+ - [BBCTaipan](https://github.com/greenonline/BBCTaipan)
+
+  [1]: https://taipangame.com/pdf/TaipanAHistoricalAdventureForTheAppleComputerAppleIIEdition.pdf
+  [2]: https://taipangame.com/
 
 ## TODO
 
