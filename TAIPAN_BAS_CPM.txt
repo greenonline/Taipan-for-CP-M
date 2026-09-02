@@ -5,6 +5,8 @@
 ### Emulator
 
  - [RunCPM](https://github.com/MockbaTheBorg/RunCPM)
+ - [altairz80](https://www.majorgeeks.com/files/details/altair_8800_simulator.html)
+   - v4.1 for Mac
 
 #### Online emulators
 
