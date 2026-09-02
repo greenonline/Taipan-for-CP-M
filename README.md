@@ -1,14 +1,17 @@
 # Taipan for CP/M
 
-Yet another Taipan port, this time for MBASIC on  CP/M
-
-The Applesoft BASIC code from the book,  [TAIPAN - A historical adventure for the Apple Computer (PDF)][1] by *Art Canfil*, *Karl Albrecht*, and *Jim McClenahan*, linked to from [taipangame.com][2].
+Yet another Taipan port, this time for MBASIC on CP/M
 
 ## Preamble
 
 Another port of Taipan! Inspired by RC2014 hardware projects.
 
 This was really painless and took just an hour or two.
+
+## Links
+
+ - [Waiting for some time on Z80 CP/M](https://stackoverflow.com/q/65777890/4424636)
+
 
 ## Notes
 
@@ -19,6 +22,13 @@ This was really painless and took just an hour or two.
 The `.txt` file is test working evolving BASIC code, containing multiple verions of the same line.
 
 However, due to the nature of emulators (FWIW, I used `altairz80`), if you paste in the code, then only the last version of a particular line is accepted, so pasting in the mess of evolved code will actually result in a working program..!
+
+### Limitations and differences
+
+ - Graphics changes due to the nature of the terminal:
+   - No horizontal scroll is possible. Therefore, the pirates arrival is not animated
+   - There is no positional print, i.e. `PRINT AT`. Thus, the cannon shot holes have to be drawn at the same time as the ship. Therefore, there is no animated ship destruction
+   - There is no downward vertical scroll. Therefore, there is no animated sinking ship
 
 ### Clone `TAIPAN_BAS_PET.txt`
 
@@ -476,28 +486,46 @@ Not in:
 
  - `TAIPAN_BAS_MMBASIC_playable.txt`
 
+#### Remove semicolon after `A$`
+
+Can keep the blank line, for scrolling purposes, so long as not too excessive, along with `B$`, but the `;` messes up formatting.
+
+For example,
+
+```none
+600 invers=1:print a$;:nrmal=1
+600 invers=1:print a$:nrmal=1
+```
+
+Also, lines:
+
+ -  250, 300, 343, 350, 365, 391, 491?, 600, 601, 611, 845, 849,  845?, 850, 851?, 980, 1100, 1111, 1220, 1229, 1291, 1300, 1320, 1350, 5310, 5850, 5920
+
+#### Remove semicolon after `B$`
+
+Lines:
+
+ - 451, 991, 1041, 1051, 1052, 1070, 1081?, 1082, 1162?, 
+1162, 1252 	
+
 ## Finished?
 
 The game is now, more or less, playable.
 
 
-## See also
-
- - [Taipan for BBC BASIC](https://gr33nonline.wordpress.com/2023/12/12/taipan-for-bbc-basic/)
-
-## Related
-
- - [!!!NOT!!! TRS80Taipan](https://github.com/greenonline/TRS80Taipan)
- - [MMBASICTaipan](https://github.com/greenonline/MMBASICTaipan)
- - [MacTaipan](https://github.com/greenonline/MacTaipan)
- - [Taipan_40_Column_Apple_II](https://github.com/greenonline/Taipan_40_Column_Apple_II)
- - [CommanderX16Taipan](https://github.com/greenonline/CommanderX16Taipan)
- - [BBCTaipan](https://github.com/greenonline/BBCTaipan)
-
-  [1]: https://taipangame.com/pdf/TaipanAHistoricalAdventureForTheAppleComputerAppleIIEdition.pdf
-  [2]: https://taipangame.com/
 
 ## TODO
 
- - The blanking `A$` is not required as it is not a full screen version.
- - Line 1162, check commodore version, check apple version
+ - The blanking `A$` is not required as it is not a full screen version. - DONE? Removed semicolon
+ - Line 1162, check commodore version, check apple version - DONE!
+ - Similar to the cleanup routine (lines 1340-1370) create a wipescreen routine for the whole terminal screen (24 lines)
+ - Need to redraw ship with the cannon ball holes already, as there is no `PRINT AT`
+   - Or redraw the whole ship for each shot, adding the new and existing shots, *whilst* drawing each line, by adding the shots on the appropriate line. 
+ - Implement a delay routine, with configurable processor speed
+ - Remove pirates arrival – can not do the left scroll.
+ - Remove sinking ship - can not do down scroll.
+
+ 
+
+
+
