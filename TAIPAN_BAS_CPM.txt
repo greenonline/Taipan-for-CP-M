@@ -10,6 +10,12 @@
 
  - tba
 
+### Strip the duplicates and blank lines
+
+```none
+perl -ane '$a[$F[0]] = $_ if ($F[0] =~ m/^\d+$/); END {print @a}' TAIPAN_BAS_CPM.txt
+```
+
 ---
 
 ## Code
