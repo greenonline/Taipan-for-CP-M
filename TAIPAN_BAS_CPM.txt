@@ -16,6 +16,26 @@
 perl -ane '$a[$F[0]] = $_ if ($F[0] =~ m/^\d+$/); END {print @a}' TAIPAN_BAS_CPM.txt
 ```
 
+or
+
+```none
+tail -r TAIPAN_BAS_CPM.txt | sort -u
+```
+
+or
+
+```none
+awk '/^[0-9]+/{val[$1]=$0} END{for (i in val) print val[i]}' TAIPAN_BAS_CPM.txt | sort -n
+```
+
+or (requires `miller` package)
+
+```none
+mlr --nidx --fs space tail -n 1 -g 1 TAIPAN_BAS_CPM.txt
+```
+
+From [Extracting last occurrence of line number from (BASIC) file](https://unix.stackexchange.com/q/807243/97255)
+
 ---
 
 ## Code
