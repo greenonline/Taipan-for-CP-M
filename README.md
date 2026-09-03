@@ -48,9 +48,9 @@ However, due to the nature of emulators (FWIW, I used `altairz80`), if you paste
 
 The initial code to be used for MBASIC on CP/M is cloned from the Commodore PET version, `TAIPAN_BAS_PET.txt`.
 
-I think that this might be a scrolling verson, as opposed to the more usual "full screen version", for the simple reason that `LOCATE` and `PRINT AT` are not valid commands in MBASIC on CP/M
+I think that this might be a scrolling verson, as opposed to the more usual "full screen version", for the simple reason that `LOCATE` and `PRINT AT` are not valid commands in MBASIC on CP/M.
 
-Apparently, according to Google AI
+Apparently, according to the horrific Google AI:
 
 > Standard Microsoft BASIC-80 (MBASIC) running under CP/M does not have a built-in LOCATE or PRINT AT command to position the cursor at specific screen coordinates.To print text at a specific row and column, you must send terminal-specific ANSI escape sequences or control codes to the screen using `CHR$(27)`
 
@@ -76,11 +76,11 @@ It goes on to say:
 > 
 >  If you tell me the model of your terminal or emulator (e.g., VT100, Kaypro, Heathkit H19, ADM-3A), I can give you the exact coordinate escape codes it requires.
  
-The AI generated BASIC code obviously does not work, in a terminal at least, using `altairz80`.
+The AI generated BASIC code obviously does not work, in a terminal at least, using `altairz80` – as is to be expected from AI gen code... "*Always scroll down to the real answer*" is my motto from now on.
 
 It is probably safe to say that positioning is out, and a scrolling format, with full page (24 lines) scrolls, being in order.
 
-Interesting but not immediately relevant, although the erroneous notes above about positioning, come from here.
+Interesting but not immediately relevant, although the AI-gen erroneous notes above about positioning, apparently come from here:
 
  - [Assembly Language Programming for the RC2014 Zed.](http://w8bh.net/Assembly%20for%20RC2014Z.pdf)
 
