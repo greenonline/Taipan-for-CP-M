@@ -86,9 +86,9 @@ Interesting but not immediately relevant, although the AI-gen erroneous notes ab
 
 ### MBASIC has no locate
 
-Fist task, duplicate all lines with `LOCATE` in them and remove the `LOCATE` statemnt. THe lines wre duplicated so that I had a record of the `LOCATE` coordinates, which could be used with `TAB` if required later.
+Fist task, duplicate all lines with `LOCATE` in them and remove the `LOCATE` statement. THe lines wre duplicated so that I had a record of the `LOCATE` coordinates, which could be used with `TAB` if required later.
 
-Previous, initial foray, I had gone up to line 25.
+Previously, my initial foray, I had gone up to line 25.
 
 Next, I went up to line 180 + 590. Safe to say that output will be unformatted and a mess. But the splash screen is appearing.
 
