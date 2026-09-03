@@ -26,6 +26,7 @@ This was really painless port and took just an hour or two, to get running.
  - [Taipan_40_Column_Apple_II](https://github.com/greenonline/Taipan_40_Column_Apple_II)
  - [CommanderX16Taipan](https://github.com/greenonline/CommanderX16Taipan)
  - [BBCTaipan](https://github.com/greenonline/BBCTaipan)
+ - [PETTaipan](https://github.com/greenonline/PETTaipan)
 
 ## Notes
 
