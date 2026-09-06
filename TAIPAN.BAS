@@ -1,563 +1,371 @@
-2 rem cpmtaipan
-4 rem max line length 79 characters 7890123456789012345678901234567890123456789
-5 rem initialization (10-50)
-10 a$ = "                                        "
-11 b$="                                       "
-12 w$ = "elder brother wu":ly$ = "li yuen"
-14 ys$ = "yanato & smythe":tc$ = "o, s, t, a, p, or r"
-20 print "S":print a$
-21 print "t a i p a n:":nrmal=1
-22 print "-----------------"
-23 print"a  g a m e  i n":
-24 print tab(15);"c o n t e x t": print:print tab(14);"hayden book co."
-25 speed = 255:invers=1:print tab(15) a$:normal=1
-30 dim m$(11),g$(5),ap(9,5),gg(5),l(9,5),gp(5),v(9)
-31 for i = 0 to 9:read l$(i):next i
-32 for i = 0 to 11: read m$(i):next i
-33 for i = 0 to 5: read g$(i):next i
-40 for i = 0 to 9
-41 for j = 0 to 5:read ap(i,j):ap(i,j) = ap(i,j) * 6 ^ (5 - j): next j
-42 next i 
-43 gosub 180
-50 for i = 0 to 9:read lo(i):next i
-51 d = 1000: y=1860: gt = 1: c=400:mw = 50:sh = mw:sr = 1: g=1:v(0) = 1
-53 gosub 5000: x$ ="":gosub 590:goto 120
-55 rem get$ subroutine (60-64)
+2 REM TAIPAN FOR CP/M
+5 REM INITIALIZATION (10-50)
+10 A$ = "                                        ":W$ = "ELDER BROTHER WU":LY$ = "LI YUEN":YS$ = "YANATO & SMYTHE":TC$ = "O, S, T, A, P, OR R"
+11 B$="                                       "
+20 INVERSE=1:PRINT A$:PRINT tab(13) "T A I P A N:": NORMAL=1:PRINT tab(13)"_________________"
+21 PRINT TAB(14) "A  G A M E  I N":PRINT TAB( 15);"C O N T E X T": PRINT:PRINT TAB( 14);"HAYDEN BOOK CO."
+22 PRINT A$
+30 DIM M$(11),G$(5),AP(9,5),GG(5),L(9,5),GP(5),V(9):FOR I = 0 TO 9:READ L$(I):NEXT I:FOR I = 0 TO 11: READ M$(I):NEXT I:FOR I = 0 TO 5: READ G$(I):NEXT I
+40 FOR I = 0 TO 9: FOR J = 0 TO 5:READ AP(I,J):AP(I,J) = AP(I,J) * 6 ^ (5 - J): NEXT J ,I: GOSUB 180
+50 FOR I = 0 TO 9:READ LO(I):NEXT I:D = 1000: Y=1860: GT = 1: C=400:MW = 50:SH = MW:SR = 1: G=1:V(0) = 1: GOSUB 5000: X$ ="":GOSUB 590:GOTO 120
+55 REM GET$ SUBROUTINE (60-64)
 60 x$=inkey$
-61 if x$="" then 60: rem if peek ( -16384) < 128 then 61
-62 rem x$ = chr$ ( peek ( -16384) - 128)
-63 rem poke -16368, 0
-64 return
-65 rem initialization data (70-110)
-70 data hongkong, foochou, shanghai, nagasaki, manila
-71 data singapore, batavia, saigon, calcutta, liverpool
-80 data jan, feb, mar, apr, may, jun
-81 data jul, aug, sep, oct, nov, dec
-90 data opium, silk, tea, arms, pepper, rice
-100 data 8,2,2,4,5,2,8,2,1,8,4,3,9,3
-101 data 3,6,5,4,6,4,2,8,6,5,3,3,4,7,4,4
-102 data 2,4,5,4,3,5,3,4,5,5,2,6,3
-103 data 1,4,5,3,3,1,5,6,3,4,5,3,9,9,1,9,5
-110 data 21,14,7,0,35,49,56,42,84,200
-115 rem main display (120-150)
-120 gosub 130: goto 220
-130 print:print "port ";l$(l);: print tab(27) m$(m);". ";da+1;",";y
-140 invers=1:print "cash ";: q = c:gosub 1330: nrmal=1
-141 print tab(27) "guns ";g: 
-142 print "debt ";: q = d:gosub 1330
-143 print tab(27) "hold ";: q = sh:gosub 1330
-144 print:invers=1:print "goods     aboard ship    hongkong godown":nrmal=1
-150 for i = 0 to 5:print g$(i);
-151 print tab(11) chr$(133);
-152 q=sg(i):gosub 1330:print tab(26) chr$ (133);: q = gg(i):gosub 1330
-153 print:next i
-154 invers=1: print a$: nrmal=1: return
-155 rem update subroutine (160-172)
-160 et = int (et + (et * rnd (1) / 3)): gt = gt + et
-161 d = d + int (d * (et / 360)):jd = jd + et
-162 if jd > 360 then jd = jd-360: y = y+1
-163 if jd < 1 then jd = 1
-170 m = int((jd - 30) / 30): da = int((((jd / 30) - int(jd/30)))*30)
-171 if rnd (1) > 0.95 then tr = 0
-172 if m < 0 then m = 0
-173 return
-175 rem price variation subroutine (180)
-180 for i = 0 to 5:gp(i) = int (ap(l,i) + ( rnd (1) * ap(l,i))):next i: return
-185 rem hi-lo subroutine (190-210)
-190 for i = 0 to 5:if gp(i) > h(l,i) then h(l,i) = gp(i)
-200 if gp(i) < l(l,i) or l(l,i) = 0 then l(l,i) = gp(i)
-210 next i: return
-212 rem market (220-350)
-217 rem market prices (220-221)
-220 gosub 790: gosub 1340:invers=1:
-221 print tab(8) " ";l$(l);" market prices ":nrmal=1:print a$
-222 for i = 0 to 4 step 2: print g$(i);
-223 print tab(10) gp(i);:print tab(21) g$(i + 1);
-224 print tab(30) gp(i + 1) :next i
-225 rem market menu (230-244)
-230 print: print " b)uy, s)ell, l)eave, or r)etire?" 
-235 rem market menu input (240-244)
-240 gosub 60: if x$= "b" then t$ = "buy":x=1
-241 if x$ = "s" then t$ = "sell":x=2
-242 if x$ = "l" then 360
-243 if x$ = "r" then 1300
-244 if x$<>"b" and x$<>"s" and x$<>"l" and x$<>"r" then gosub 770:goto 240
-247 rem item menu (250)
-250 print a$:print tab(3) t$;" ";tc$;"?": gosub 260:goto 280
-255 rem item choice subroutine (260-270)
-260 gosub 60:if x$ = "o" then x1 = 0
-261 if x$ = "s" then x1 = 1
-262 if x$ = "a" then x1 = 3 
-263 if x$ = "p" then x1 = 4 
-265 if x$ = "r" then x1 = 5
-268 if x$<>"o" and x$<>"s" and x$<>"t" and x$<>"a" and x$<>"p" and x$<>"r" then gosub 770
-269 if x$<>"o" and x$<>"s" and x$<>"t" and x$<>"a" and x$<>"p" and x$<>"r" then goto 260
-270 return
-280 if x=1 and gp(x1) > c then rem
-281 if x=1 and gp(x1) > c then print "you can't afford any ";g$(x1);". ";
-282 if x=1 and gp(x1) > c then gosub 760:goto 230
-290 if x = 2 and sg(x1) < 1 then rem
-291 if x = 2 and sg(x1) < 1 then print "you have no ";g$(x1); " aboard!      ";
-292 if x = 2 and sg(x1) < 1 then gosub 760:goto 230
-300 print a$:print:print t$;" how much ";g$(x1);
-301 print "? ";:num$ = "":num = 0:gosub 305:goto 320
-305 rem sooper dooper number scooper subroutine (310-314)
-306 print chr$ (8);: invers=1:print " ";:nrmal=1:gosub 60
-307 if len(num$) > 0 and asc(x$) = 8 then print x$;: print" "; 
-308 if len(num$) > 0 and asc(x$) = 8 then print x$;x$;:print" ";:fg=1
-309 if len(num$) > 0 and asc(x$) = 8 and len(num$) = 1 then num$ = "": fg = 0
-310 if len(num$) > 0 and asc(x$) = 8 and len(num$) = 1 then goto 305
-311 if fg = 1 then num$ = left$ (num$, len (num$) - 1):fg = 0: goto 305
-312 if asc (x$) = 65 or asc (x$) = 13 then return
-313 if asc (x$) < 48 or asc (x$) > 57 then 305
-314 num$ = num$ + x$: print chr$ (8);x$; 
-315 invers=1:print " ";:nrmal=1: goto 305
-320 if x = 1 then if x$ = "a" then print chr$ (8);: invers=1
-321 if x = 1 then if x$ = "a" then print "all"; :num = int (c / gp(x1))
-322 if x = 1 and x$ <> "a" then num = val (num$)
-330 if x = 2 then if x$ = "a" then print chr$ (8) ; : invers=1
-331 if x = 2 then if x$ = "a" then print "all";:num = sg(x1)
-332 if x = 2 and x$ <> "a" then num = val (num$) 
-335 nrmal=1
-340 if x = 1 then if num * gp(x1) > c then print 
-341 if x = 1 then if num * gp(x1) > c then print "you can't afford so much! ";
-342 if x = 1 then if num * gp(x1) > c then gosub 760
-343 if x = 1 then if num * gp(x1) > c then print a$:goto 300
-344 if x = 1 and num * gp(x1) <= c then sg(x1) = sg(x1) + num: sh=sh- num
-345 if x = 1 and num * gp(x1) <= c then c=c - gp(x1) * num:gosub 130: goto 230
-350 if num>sg(x1)then print a$
-351 if num>sg(x1)then print"you don't have that much! ";
-352 if num > sg(x1) then gosub 760:print a$ ;:goto 300
-353 sg(x1) = sg(x1)-num:sh=sh + num:c = c + (num * gp(x1) ) :gosub 130:goto 230
-355 rem other options (360-381)
-360 gosub 130: gosub 1340:invers=1:print a$:nrmal=1:
-361 print " t)rade, r)ecords" ; 
-363 if l = 0 then print ", l)ender, g)odown or e)mbark?":print: print a$
-365 if l <> 0 then print " or e)mbark?": print:print: print a$
-370 gosub 60:if x$ = "g" and l = 0 then x = 1
-371 if x$ = "t" then 120
-372 if x$ = "r" then x=2
-373 if x$ = "l" then x=3
-374 if x$ = "e" then 730
-375 if (x$<>"g" or l<>0)and x$<>"t"and x$<>"r"and x$<>"l"and x$<>"e" then gosub 770
-376 if (x$<>"g"or l<>0)and x$<>"t"and x$<>"r"and x$<>"l"and x$<>"e" then goto 370
-380 if x = 3 and l <> 0 then gosub 770: goto 370
-381 if x <> 3 or l = 0 then on x gosub 390,600,470: goto 360
-384 rem godown subroutine (390-461)
-387 rem godown menu (390-392)
-390 gosub 130:print a$:print "cargo <t>o or <f>rom godown?"
-391 print a$:gosub 60:if x$= "t" then 410
-392 if x$="f" then 440
-393 if x$<> "t" and x$ <> "f" then gosub 770: goto 390
-395 rem godown cargo choice subroutine (400)
-400 print "move what ("tc$")? ": gosub 260:return
-410 gosub 400
-411 if sg(x1) = 0 then print"you have no ";g$(x1);" aboard!        "
-412 if sg(x1) = 0 then gosub 760:return
-420 num$="":print a$:print tab 13 " move how much ";g$(x1);"? ";
-421 gosub305:if x$="a" then invers=1:print chr$(8);"all";:num = sg(x1):nrmal=1
-422 if x$ <> "a" then num = val (num$)
-425 rem tab(1)
-430 if num > sg(x1) then print " only ";:q = sg(x1):gosub 1330
-431 if num > sg(x1) then print tab(11);" units aboard!    ":gosub 760:goto 420
-432 ifnum<=sg(x1)then sg(x1)=sg(x1)-num:sh=sh+num:gg(x1)=gg(x1)+num:num$=""
-433 ifnum<=sg(x1)then return
-440 gosub 400
-441 if gg(x1) = 0 then print" the godown has no ";g$(x1);".           "
-442 if gg(x1) = 0 then gosub 760:return
-450 num$=""
-451 printb$:print" move how much ";g$(x1);" to ship? ";
-452 gosub305:ifx$="a"thenprint chr$(8);:invers=1:print"all";:nrmal=1:num=gg(x1)
-453 if x$ <> "a" then num = val (num$)
-460 if num>gg(x1)then print" just ";:q=gg(x1):gosub 1330
-461 if num>gg(x1)then print " units stored!":gosub 760: goto 450
-462 if num < = gg(x1) then gg(x1) =gg(x1) - num: sg(x1) = sg(x1) + num
-463 if num < = gg(x1) then sh=sh- num:num$= "":return
-465 rem lender subroutine (470-580)
-470 gosub 130:gosub 1340
-471 print "[wanchai district of hongkong: home of "; w$;"]":print w$;
-472 print " greets you, taipan, and wishes you well.":gosub 780
-473 print a$:print a$
-480 print "wu states that his iron lotus": 
-481 print "triad has been watching you.": gosub 780
-490 print a$: print a$: print a$:print w$;
-491 print " asks, do you"
-492 print "wish to b)orrow, p)ay, or q)uit?    ";: num$ = ""
-500 gosub 60:if x$ = "b" then ld$ = "borrow": ld = 1
-501 if x$ = "p" then ld$ = "pay": ld = 2
-502 if x$ = "q" then print: gosub 1340:return
-503 if x$ <> "b" and x$ <> "p" and x$ <> "q" then gosub 770: goto 500
-510 if ld = 1 and (b = 1 or d > 1e4) then gosub 1340
-511 if ld = 1 and (b = 1 or d > 1e4) then print"wu regrets that he cannot loan":
-512 if ld = 1 and (b = 1 or d > 1e4) then print"you more at this time, taipan.";
-513 if ld = 1 and (b = 1 or d > 1e4) then gosub 760:goto 490
-520 gosub 1340: print "how much do you wish to ";ld$;","
-521 print "taipan? ";:gosub 305:num = val (num$)
-530 if x$="a" and ld=1then print chr$(8);:invers=1:print"all";:nrmal=1:num=c*2
-532 if x$="a" and ld=2then print chr$(8);: invers=1:print "all";: nrmal=1:num = d
-540 if ld = 2 then 560
-541 if num>2*c then print a$:print w$;" regrets that he"
-542 if num>2*c then print "cannot loan you that much.";: gosub 760:goto 490
-550 b=1:c = c + num:d = d + num: gosub 130: goto 490
-560 if num > c then num = c: d = d - c:c=0:gosub 130:print w$;
-561 if num > c then print" thanks you,":print "taipan, for the payment.";
-562 if num > c then gosub 780:if d < 0 then d = 0:gosub 130:goto 490
-563 if num > c and d > = 0 then gosub 130: goto 490
-570 if num > d then d = 0: c = c - num:print w$;
-571 if num > d then print" thanks you for your startling generosity!";
-572 if num > d then gosub 130:gosub 780:goto 490
-580 c = c - num: d = d - num:gosub 130
-581 print w$;" accepts your payment with gratitude, taipan";:gosub 780:goto 490
-585 rem randomizer subroutine (590-591)
-590 print "press <";:flsh=1:print"spacebar";:nrmal=1
-591 print"> to start"; : gosub 60:if x$ = " " then return
-592 x = int ( rnd (1) * 9) + 1: goto 590
-595 rem records subroutine (600-721)
-600 invers=1:print a$:nrmal=1
-601 print "    records of high & low prices":invers=1:print a$:nrmal=1:print
-602 print "    records by p)ort or i)tem? "
-603 print "    =========================="
-605 print "    press <spacebar> when finished":print: invers=1
-606 print a$: nrmal=1
-610 gosub 60:if x$ = "p" then gosub 720: goto 620
-611 if x$ = "i" then print: print a$: print a$: gosub 660: goto 670
-612 if x$ = " " then return
-613 if x$ <> "p" and x$ <> "i" and x$ <> " " then gosub 770: goto 610
-620 gosub 60:if asc (x$) > 47 and asc (x$) < 58 then x = val(x$)
-621 if asc (x$) < 48 or asc (x$) > 57 then gosub 770:goto 620
-630 print " ";l$(x);" prices (visits:";v(x);")": invers=1
-631 print " item              high         low     ";:nrmal=1
-632 for i = 0 to 5:print " ";g$(i);:print tab(21);
-640 if h(x,i)=0 then print" ?";:inv=1:print tab(30)" ";
-641 if h(x,i)=0then nrmal=1:print"   ?":next i
-642 if h(x,i)<>0then print tab(21) h(x,i);
-643 if h(x,i)<>0then print tab(30) " ";:print" ";l(x,i):next i
-650 invers=1: print a$:nrmal=1: goto 700
-660 for i = 0 to 5:print " ";g$(i),:next i:print
-661 print " what item (";tc$; "  ?": print:print a$:invers=1: print a$: nrmal=1
-662 gosub 260: return
-670 print " ";g$(x1);"  prices": invers=1
-671 print " port      visits     high    low       ";:nrmal=1
-672 for i = 0 to 9:print l$(i);
-680 print tab(12) v(i);:if l(i,x1) = 0 then invers=1:print tab(21) " ";
-681 if l(i,x1) = 0 then invers=1:print tab(21) " ";: nrmal=1:print "  ?";: 
-682 if l(i,x1) = 0 then print tab(32);"?"
-683 if l(i,x1)<>0 then invers=1:print tab(21);" ";:nrmal=1:print "  ";h(i,x1) ;
-684 if l(i,x1)<>0 then print tab(31);" ";l(i,x1)
-685 next i
-690 invers=1: print a$:nrmal=1
-700 print " press <spacebar> when finished";
-710 gosub 60:if x$ = " " then 600
-711 goto 710
-715 rem port choice subroutine (720)
-720 for i=0 to 9 step 2: print a$:  
-721 print i;" ";l$(i);: print tab(20) i + 1;" ";l$(i):next i:print
-722 print "       which port (0-9)?             ": print:invers=1: 
-723 print a$: nrmal=1: return
-725 rem embark (730-751)
-730 if sh < 0 then print "your ship is overloaded, taipan         ";
-731 if sh < 0 then print a$:gosub 760:goto 360
-732 print tab( 11);:invers=1:print "embarking":nrmal=1
-733 print tab( 9);"from " ;l$ (l ) : invers=1:print a$:nrmal=1
-734 for i = 0 to 9
-735 if l <> i then print tab( 10);i;" ";l$(i)
-736 next i
-740 print:print:inv=1:print a$:nrmal=1:print"what port o' call, taipan (0-9)?"
-750 gosub 60
-751 if asc(x$)>47 and asc(x$)<58 and val(x$)<>l then po = val (x$) : goto 980
-752 gosub 770: goto 750
-755 rem no can do subroutine (760)
-760 print chr$(7): gosub 780:return
-765 rem input error subroutine (770)
-770 print chr$(7);: return
-775 rem delay subroutine (780-783)
-780 rem poke -16368,0
-781 rem fori=0to250
-782 rem if peek ( -16364) > 127 then poke -16368,0:return
-783 rem next i: return
-784 REM
-785 rem events subroutine (790-851)
-790 if k = 1 then return
-791 k=1:x = 50 + int ( rnd (1) * 100) + 1: gn = int ( rnd (1) * 3) +1
-792 xp = (x + (gn * 50)) * 100:if c < xp or rnd (1) < .75 then 805
-795 gosub 1340: print " a broker offers to take your"
-796 print "vessel in trade for one with":printgn+g;" guns & ";x+mw;" capacity"
-800 print "for ";xp;" in cash. will you": print " accept (<y> or <n>)?";
-801 gosub 60
-802 if x$ = "y" then c = c - xp:sh = sh + x:mw = mw + x:g = g + gn: gosub 130
-805 gosub 1340
-810 dice=c>d and d>2000 and rnd(1)>.7
-811 if dice then gosub 1340
-812 if dice then print"you've been attacked and robbed by ";
-813 if dice then print"iron lotus ruffians, taipan!";:c=int(c/3):gosub 760:gosub 130
-820 gosub 180: gosub 860: gosub 190:gosub 1340:dn = int ((c / 2) * rnd (1))
-821 dice = rnd(1)>.8 and tr=0 and l<>0
-822 if dice then print "a messenger from ";ly$;" asks"
-823 if dice then print "that you return to hong kong"
-825 if dice then print "without delay, taipan.":gosub780
-829 rem negative logic
-830 if not(c>100 and tr=0 and l=0) then goto 840
-831 gosub 1340:print ys$;", lieutenants"
-832 print "of the mariner, ";ly$;", ask if"
-833 print "you will donate ";:q = dn:gosub 1330
-834 print "to the temple of tin hau, the"
-835 print "sea goddess. (y) or (n)"
-840 if not(c>0 and tr=0 and l=0)then goto 850
-841 gosub 60:if x$="y" then c=c-dn:tr=1:gosub 130
-842 if x$="y" then gosub 1340:print " "
-843 if x$="y" then print " ";ys$;" thank"
-844 if x$="y" then print " you, and depart."
-845 if x$="y" then print:print a$
-846 if x$<>"y" then gosub 1340:print" ":print" ";
-847 if x$<>"y" then print ys$;" depart"
-848 if x$<>"y" then print "abruptly in a chilly silence."
-849 if x$<>"y" then print a$
-850 if(tr=0 and l=0) or x$ = "y" and l = 0 then print: print a$:gosub 780
-851 if(tr=0 and l=0) or x$ = "y" and l = 0 then print a$:print:print
-854 return
-855 rem bears 'n' bulls subroutine (860-910)
-860 i = int ( rnd (1) * 6)
-870 if rnd (1) < .85 then return
-880 gp(i) = int (gp(i) * ( rnd (1) * 4) + .5)
-890 print l$(l);" market forces have": print "driven ";g$(i);
-891 print " prices to ";:print gp(i);: print "!";
-900 gosub 780
-910 return
-975 rem voyage (980-1290)
-980 print:invers=1:print a$:nrmal=1:print " sea voyage from ";l$(l)
-981 print " to ";l$(po) :invers=1: print a$: nrmal=1: gosub 780
-982 et = abs (lo(l) - lo(po))
-984 if int ( rnd (1) * 50) + 1 >int ( rnd (1) * et) + 1 then 1290
-985 rem storm (990-1022)
-990 if rnd (1) > .5 then 1030
-991 print b$:print " storm, taipan!" : gosub 760
-1000 if rnd (1) > .2 then 1020
-1001 print " any port in a storm,                 ": gosub 760
-1002 po = int ( rnd (1) * 10) :if po = l then REM tab 14
-1003 print " we can't make it,                      taipan,            "
-1004 sr = 0:goto 1090
-1010 REM tab 14
-1011 print " we're headed                           for shelter,          "
-1012 gosub 780
-1020 rem tab 14
-1021 print " we rode out the                        storm, taipan!       "
-1022 gosub 780
-1023 if rnd (1) > .5 then 990
-1024 goto 1290
-1025 rem pirates (1030-1281)
-1030 id = int ( rnd (1) * 2) + 1:gosub 5290
-1031 p = int ( rnd (1) * (mw / 25) * 2 ^ (id*2)) * int ( rnd (1) * 3) + 1
-1032 print p;" pirate craft sighted!": gosub 780:gosub 1100
-1040 if id=1 then print" looks like independent pirates.": gosub 780
-1041 if id<>1 then print b$:print" there's ";ly$;"'s banner!"
-1042 if id<>1 then gosub 780
-1050 gosub 1100
-1051 dice = id=1 and rnd(1)>.95
-1052 if dice then print b$:print " ";ly$;
-1053 if dice then print"'s fleet drove 'em off!":gosub 6100
-1054 if dice then p=p*int(rnd(1)*10)+6:id=2:gosub 5290:gosub 1100
-1055 if dice then if tr = 0 then 1070
-1060 if id=2 and tr=1 then print "they greet us, and sail off.    "
-1061 if id=2 and tr=1 then gosub 6100:p=0:gosub 780:if rnd (1) > .8 then 1030
-1062 if id = 2 and tr = 1 then 1290
-1070 if cr=0 and tr=0 and id=2 then cr=1:print b$:print" ";ys$;
-1071 if cr=0 and tr=0 and id=2 then print" are cursing us!": gosub 780
-1080 print "  they're firing on us!          ": gosub 5380
-1081 dice=int(rnd(1)*p)+1>int(rnd(1)*5)+1
-1082 if dice then gosub 5540:print b$:print" the buggers hit us!"
-1083 if dice then sr=sr-(rnd(1)/(mw/(int(rnd(1)*50)+1)))
-1084 if dice then gosub 780:gosub 1100:goto 1090
-1085 print " missed us, taipan!        ": gosub 780
-1090 if sr<.1 then gosub 780: print " we're going under, taipan!      "
-1091 if sr<.1 then gosub 6290:x$= "":goto 1300
-1092 goto 1120
-1095 rem ship status subroutine (1100-1110)
-1100 invers=1:print a$:nrmal=1:print" guns: ";g;"         repair:";
-1101 if sr<0then sr=0
-1110 print int (sr * 100);"%  ":print "ships encountered:";p;"       "
-1111 print a$:print a$:print a$:return
-1120 print " shall we r)un, f)ight, or p)arley?": gosub 60
-1121 if x$ = "r" then x = 1
-1122 if x$ = "f" then x = 2
-1123 if x$ = "p" then x = 3
-1124 if x$ <> "r" and x$ <> "f" and x$ <> "p" then gosub 770:goto 1120
-1130 on x goto 1140,1160,1200
-1140 if sr<=rnd(1) and int(rnd(1)*6)+1 < = int ( rnd (1) * p) + 1 then 1150
-1141 if sr>rnd(1) and int(rnd(1) * 6) + 1 > int ( rnd (1) * p) + 1 then 1143
-1142 goto 1150
-1143 gosub 6220: print "we escaped from 'em taipan!         "
-1144 p=0:gosub 780:gosub 1100:if rnd (1) > .8 then 1030
-1145 goto 1290
-1150 dice=sr>rnd(1) and rnd(1)>.6
-1151 if dice then p=p-int(int((rnd(1)*p)+1)/2):gosub 6220
-1152 if dice then gosub 5290:print p;
-1153 if dice then print" of 'em still with us!                         "
-1154 if dice then gosub 780: gosub 1100: goto 1050
-1155 print " can't shake 'em!                               "
-1156 gosub 780: goto 1050
-1160 print " we're firing on 'em!               ":gosub 5540
-1161 dice=int(rnd(1)*(g+1))+1>int(rnd(1)*4)
-1162 if dice then print b$:print "hit 'em!"
-1163 if dice then gosub 5680:goto 1170
-1168 print " missed 'em!                        "
-1169 gosub 780: goto 1190
-1170 nk = rnd (1)
-1171 if nk > .4 then if p >= g then x = int(int((rnd(1)*(g-1))+1)/3) + 1
-1172 if nk > .4 and p < g then x = int ( rnd (1) * p)+1
-1173 if nk <= .4 then print " they're still afloat."
-1174 if nk <= .4 then gosub 780:goto 1190
-1180 p=p-x: print " sank ";x;" of 'em, taipan!": gosub 5830
-1181 if p > 0 then gosub 5290
-1190 gosub 1100:if p = 0 then if rnd (1) > .5 then 1270
-1191 if p = 0 then print " that's all for the buggers!"
-1192 if p = 0 then gosub 780:if rnd (1) > .8 then 1030
-1194 if p = 0 then 1290
-1195 gosub 780: goto 1050
-1200 dice=rnd (1) < .8
-1201 if dice then print" they refuse to parley, taipan.       "
-1202 if dice then gosub 780:goto 1050
-1205 print " they agree to discuss terms.         ": gosub 780
-1210 dice=p > g / 2 or rnd (1) > .7
-1211 if dice then print" they offer to let us go in exchange for";
-1212 if dice then print "all our cash. do we accept, taipan (y/n)";: goto 1220
-1213 goto 1240
-1220 gosub 60: print a$:print a$
-1221 dice=rnd (1) > .2 and c> 100 + int ( rnd (1) * 2000)
-1222 if x$="y" then if dice then p=0:c=0:print" they took it & ran!"
-1223 if x$="y" then if dice then gosub 780:gosub 1100:goto 1280
-1227 if x$ <> "y" then 1050
-1228 c=0
-1229 print " they still intend to fight!": print:print a$:gosub 780
-1230 gosub 780: goto 1050
-1240 print sfl$;
-1241 print " they offer to surrender.     ":gosub 780
-1242 print " do we let them give up (y/n)?     "
-1243 gosub 60:if x$ = "y" then 1260
-1250 dice = rnd (1) > .5 and p > 0
-1251 if dice then e = int ( rnd (1) * p) + 1: p=p-e:gosub 6100
-1252 if dice then print b$:print e;" of 'em ran away!"
-1253 if dice then gosub 780:gosub 1100:gosub 5290:goto 1050
-1260 dice=rnd (1) > .7
-1261 if dice then print " they're preparing to attack!   "
-1262 if dice then gosub 780:goto 1050
-1265 rem capture (1270-1281)
-1270 print " we've captured a bigger ship!" : gosub 760
-1271 print " we're transferring to it now.": gosub 780:
-1272 g = g + int ( rnd (1) * (g + 1)) + 1
-1273 e = sh + int ( rnd (1) * (sh + 150)) + 1: sh = sh + e:mw = mw + e:p=0
-1280 if sr < .1 then 1300 
-1281 if p > 0 then 1050 
-1285 rem arrival (1290)
-1290 cr = 0: sr = 1:l=po:v(l) = v(l) + 1: b=0:k=0:gosub 160:print:invers=1
-1291 print a$: nrmal=1: print " arriving "; l$(l);" after"
-1292 print " a voyage of ";et;" days.": invers=1:print a$:nrmal=1
-1293 gosub 780: goto 120
-1295 rem that's all folks (1300-1321)
-1300 nw = c - d:q = nw / gt: invers=1: print a$: nrmal=1: print
-1301 print "your score, based upon time and your": 
-1302 print "net worth (excluding stock) is ";: gosub 1330:invers=1: 
-1303 print a$: nrmal=1
-1310 if x$ = "r" then print "would you like to pick up this"
-1311 if x$ = "r" then print"game where you left off (y/n)?"
-1312 if x$ = "r" then gosub 60:if x$ = "y" then goto 120
-1320 gosub 1340: print a$: print "do you wish to start over (y/n)?"
-1321 gosub 60:if x$ = "y" then run
-1322 end
-1325 rem big number subroutine (1330-1370)
-1330 if abs (q) < 1e6 then print int (q);: nrmal=1:print "   ";: return
-1331 if abs (q) < 1e9 then q = q / 1e6: q$ = "mil";:goto 1335
-1332 if abs (q) < 1e12 then q = q / 1e9: q$ = "bil";:goto 1335
-1333 if abs (q) > = 1e12 then q = q / 1e12: q$ = "trl";:goto 1335
-1335 print int (q);q$;: nrmal=1:print "      ";
-1337 return
-1338 rem cleanup subroutine (1340-1370)
-1340 for i = 12 to 18
-1345 rem
-1350 print a$
-1360 next i
-1365 print
-1370 return
-4995 rem sea action subroutines (5000-6360)
-4997 rem graphics initialization (5000-5120)
-5000 dim ch$(14),cn$(14 )
-5005 for v1 = 0 to 12
-5010 read ch$(v1)
-5020 cn$(v1) = ch$(v1)
-5030 next v1
-5040 data    "          :             "
-5050 data    "       -------          "
-5060 data    "       -------    \:    "
-5070 data    " :/    -------    \\    "
-5075 data    " //    -------    \\\   "
-5080 data    "///    -------    \\\   "
-5085 data    "///    -------     \\   " 
-5090 data    "///    -------     :\   " 
-5100 data    "//     -------     :    "
-5105 data    "/:     -------    -:-   "
-5110 data    " :--      :      :000:  "
-5111 data    ":   \------------/   /  "
-5112 data    " \                  /   "
-5120 return
-5290 rem pirates arrive (5300-5370)
-5300 gosub 5950
-5305 if id <> 1 then ch$(0) = "       ===:          "
-5310 for a = 1 to 10: print a$:next a
-5320 for a = 1 to 30
-5340 for b = 0 to 13
-5350 print left$ (ch$(b),a),;" ";
-5360 next b: next a
-5370 return
-5380 rem pirates fire (5360-5440)
-5390 for a = 1 to int(rnd(1) * 6) + 1
-5410 a1 = int ( rnd (1) * 10) + 1
-5420 if a1 = 5 then 5410
-5430 print "*"
-5432 print chr$(7)
-5433 print " "
-5435 next a
-5440 return
-5540 rem cannon hit (5550-5560)
-5550 print chr$(7)
-5560 return
-5680 rem damage 'em (5730-5760)
-5730 i = int ( rnd (1) * 17) + 2: i1 = int ( rnd (1) * 9) + 2
-5740 ch$(i1)=left$(ch$(i1),i - 1)+" "+mid$(ch$(i1),i+1,len(ch$(i1)))
-5750 print ch$(i1)
-5755 gosub 780
-5760 return
-5830 rem pirates sink (5840-5940)
-5840 for a = 0 to 12
-5850 print a$
-5870 for a1=0 to 12-a
-5880 print ch$(a1)
-5890 next a1
-5910 next a
-5920 print a$
-5930 gosub 5950
-5940 return
-5950 rem repair damage (5960-5990)
-5960 for a = 0 to 13
-5970 ch$(a)= cn$(a)
-5980 next a
-5990 return
-6100 rem pirates depart (6110-6210)
-6110 for a = 9 to 0 step -1
-6130 for b = 0 to 13
-6140 print ch$(b);" "
-6150 next b: next a
-6160 for a = 22 to 1 step -1
-6180 for b = 0 to 13
-6190 print right$ (ch$ (b) ,a) ;" "
-6200 next b: next a
-6210 return
-6220 rem we pull away (6230-6280)
-6230 for a = 30 to 1 step -1
-6250 for b = 0 to 13
-6260 return
-6270 next b: next a
-6290 rem we're sunk! (6300-6360)
-6300 for a = 1 to 17
-6310 for b = 1 to 100: next b
-6320 print tab( rnd (1) * 40) + 1 "o"
-6350 next a
-6360 return
+61 if x$="" then 60
+62
+63
+64 RETURN
+65 REM INITIALIZATION DATA (70-110)
+70 DATA HONGKONG, FOOCHOU, SHANGHAI, NAGASAKI, MANILA, SINGAPORE, BATAVIA, SAIGON, CALCUTTA, LIVERPOOL
+80 DATA JAN, FEB, MAR, APR, MAY, JUN
+81 DATA JUL, AUG, SEP, OCT, NOV, DEC
+90 DATA OPIUM, SILK, TEA, ARMS, PEPPER, RICE
+100 DATA 8,2,2,4,5,2,8,2,1,8,4,3,9,3,3,6,5,4,6,4,2,8,6,5,3,3,4,7,4,4,2,4,5,4,3,5,3,4,5,5,2,6,3,1,4,5,3,3,1,5,6,3,4,5,3,9,9,1,9,5
+110 DATA 21,14,7,0,35,49,56,42,84,200
+115 REM MAIN DISPLAY (120-150)
+120 GOSUB 130: GOTO 220
+130 PRINT "PORT ";L$(L);: PRINT TAB(28)TM$(M);". ";DA+1;",";Y
+140 INVERSE=1:PRINT "CASH ";: Q = C:GOSUB 1330: NORMAL=1:PRINT TAB(28) "GUNS ";G: PRINT "DEBT ";: Q = D:GOSUB 1330:PRINT TAB(28) "HOLD ";: Q = SH:GOSUB 1330
+141 PRINT:INVERSE=1:PRINT "GOODS     ABOARD SHIP    HONGKONG GODOWN":NORMAL=1
+150 FOR I = 0 TO 5: PRINT G$(I);:PRINT TAB(11) CHR$ (133);: Q=SG(I):GOSUB 1330:PRINT TAB(26) CHR$ (133);: Q = GG(I):GOSUB 1330: PRINT: NEXT I: INVERSE=1: PRINT A$: NORMAL=1: RETURN
+155 REM UPDATE SUBROUTINE (160-172)
+160 ET = INT (ET + (ET * RND (1) / 3)): GT = GT + ET:D = D + INT (D * (ET / 360)):JD = JD + ET:IF JD > 360 THEN JD = JD-360: Y=Y+1
+161 IF JD<1 THEN JD=1
+170 M= INT ((JD - 30) / 30): DA = INT ((((JD / 30) -INT(JD/30)))*30):IF RND (1) > .95 THEN TR = 0
+171 IF M < 0 THEN M = 0
+172 RETURN
+175 REM PRICE VARIATION SUBROUTINE (180)
+180 FOR I = 0 TO 5:GP(I) = INT (AP(L,I) + ( RND (1) * AP(L,I))):NEXT I: RETURN
+185 REM HI-LO SUBROUTINE (190-210)
+190 FOR I = 0 TO 5:IF GP(I) > H(L,I) THEN H(L,I) = GP(I)
+200 IF GP(I)<L(L,I)OR L(L,I)=0THEN L(L,I)= GP (I)
+210 NEXT I: RETURN
+212 REM MARKET (220-350)
+217 REM MARKET PRICES (220-221)
+220 GOSUB 790: GOSUB 1340:INVERSE=1:PRINT TAB(8) " ";L$(L);" MARKET PRICES ":NORMAL=1:PRINT A$:FOR I = 0 TO 4 STEP 2: PRINT G$(I);: PRINT TAB(10) GP(I) ;: PRINT TAB(21) G$(I + 1);
+221 PRINT TAB(30) GP(I + 1) :NEXT I
+225 REM MARKET MENU (230-244)
+230 PRINT: PRINT " B)UY, S)ELL, L)EAVE, OR R)ETIRE?" 
+235 REM MARKET MENU INPUT (240-244)
+240 GOSUB 60: IF X$= "B" OR X$ = "b" THEN T$ = "BUY":X=1
+241 IF X$= "S" OR X$ = "s" THEN T$ = "SELL":X=2
+242 IF X$="L" OR X$="l" THEN 360
+243 IF X$ = "R" OR X$="r" THEN 1300
+244 IF X$ <> "B" AND X$ <> "S" AND X$ <> "L" AND X$ <> "R" AND X$ <> "b" AND X$ <> "s" AND X$ <> "l" AND X$ <> "r" THEN GOSUB 770:GOTO 240
+247 REM ITEM MENU (250)
+250 PRINT TAB(3)T$;" ";TC$;"?": GOSUB 260:GOTO 280
+255 REM ITEM CHOICE SUBROUTINE (260-270)
+260 GOSUB 60:IF X$ = "O" OR X$ = "o" THEN X1 = 0
+261 IF X$ = "S" OR X$ = "s" THEN X1 = 1
+262 IF X$ = "A" OR X$ = "a" THEN X1 = 3 
+263 IF X$ = "P" OR X$ = "p" THEN X1 = 4 
+264 IF X$ = "T" OR X$ = "t" THEN X1 = 2 
+265 IF X$ = "R" OR X$ = "r" THEN X1 = 5
+266 IF X$ <> "O" AND X$ <> "S" AND X$ <> "T" AND X$ <>"A" AND X$ <> "P" AND X$ <> "R" AND X$ <> "o" AND X$ <> "s" AND X$ <> "t" AND X$ <>"a" AND X$ <> "p" AND X$ <> "r" THEN GOSUB 770:GOTO 260
+270 RETURN
+280 IF X=1 AND GP(X1) > C THEN PRINT "YOU CAN'T AFFORD ANY ";G$(X1);". ";: GOSUB 760:GOTO 230
+290 IF X = 2 AND SG(X1) < 1 THEN PRINT "YOU HAVE NO ";G$(X1); " ABOARD!      ";: GOSUB 760:GOTO 230
+300 PRINT A$:PRINT T$;" HOW MUCH ";G$(X1);: PRINT "? ";:NUM$ = "":NUM = 0:GOSUB 310:GOTO 320
+305 REM SOOPER DOOPER NUMBER SCOOPER SUBROUTINE (310-314)
+310 PRINT CHR$ (8);: INVERSE=1:PRINT " ";:NORMAL=1:GOSUB 60:IF LEN (NUM$) > 0 AND ASC (X$) = 8 THEN PRINT X$;: PRINT" "; :PRINT X$;X$;:PRINT" ";:FG=1:IF LEN (NUM$) = 1 THEN NUM$ = "": FG = 0:GOTO 310
+311 IF FG = 1 THEN NUM$ = LEFT$ (NUM$, LEN (NUM$) - 1):FG = 0: GOTO 310
+312 IF ASC (X$) = 65 OR ASC (X$) = 13 THEN RETURN
+313 IF ASC (X$) < 48 OR ASC (X$) > 57 THEN 310
+314 NUM$ = NUM$ + X$: PRINT CHR$ (8);X$; : INVERSE=1:PRINT " ";:NORMAL=1: GOTO 310
+320 IF X= 1 THEN IF X$ = "A" THEN PRINT CHR$ (8);: INVERSE=1:PRINT "ALL"; :NUM = INT (C / GP(X1))
+321 IF X = 1 AND X$ <> "A" THEN NUM = VAL (NUM$)
+330 IF X = 2 THEN IF X$ = "A" THEN PRINT CHR$ (8) ; : INVERSE=1:PRINT "ALL";:NUM = SG(X1)
+331 IF X = 2 AND X$ <> "A" THEN NUM = VAL (NUM$) 
+335 NORMAL=1
+340 IF X = 1 THEN IF NUM * GP(X1) > C THEN PRINT :VTAB 18:PRINT "YOU CAN'T AFFORD SO MUCH! ";: GOSUB 760:VTAB 18:PRINT A$;:GOTO 300
+341 IF X = 1 AND NUM * GP(X1) < = C THEN SG(X1) = SG(X1) + NUM: SH=SH- NUM:C = C - GP(X1) * NUM:GOSUB 130: GOTO 230
+350 IF NUM > SG(X1) THEN VTAB 18: PRINT A$;:VTAB 18:PRINT "YOU DON'T HAVE THAT MUCH! ";: GOSUB 760:VTAB 18:PRINT A$ ;:GOTO 300
+351 SG(X1) = SG(X1) - NUM: SH = SH + NUM:C = C + (NUM * GP(X1) ) : GOSUB 130:GOTO 230
+355 REM OTHER OPTIONS (360-381)
+360 GOSUB 130: GOSUB 1340:INVERSE=1:PRINT A$:NORMAL=1:PRINT " T)RADE, R)ECORDS" ; :IF L = 0 THEN PRINT ", L)ENDER, G)ODOWN OR E)MBARK?":PRINT: PRINT A$
+361 IF L <> 0 THEN PRINT " OR E)MBARK?": PRINT:PRINT: PRINT A$;
+370 GOSUB 60:IF X$ = "G" OR X$="g" AND L = 0 THEN X = 1
+371 IF X$ = "T" OR X$="t" THEN 120
+372 IF X$="R" OR X$="r" THEN X=2
+373 IF X$="L" OR X$="l" THEN X=3
+374 IF X$="E" OR X$="e" THEN 730
+375 IF (X$<>"G"OR L<>0) AND (X$<>"g"OR L<>0) AND X$ <>"T" AND X$<> "R" AND X$ <> "L" AND X$ <> "E" AND X$ <>"t" AND X$<> "r" AND X$ <> "l" AND X$ <> "e" THEN GOSUB 770: GOTO 370
+380 IF X = 3 AND L <> 0 THEN GOSUB 770: GOTO 370
+381 IF X <> 3 OR L = 0 THEN ON X GOSUB 390,600,470: GOTO 360
+384 REM GODOWN SUBROUTINE (390-461)
+387 REM GODOWN MENU (390-392)
+390 GOSUB 130: VTAB 13:PRINT A$:VTAB 13:PRINT "CARGO <T>O OR <F>ROM GODOWN?":PRINT A$;:GOSUB 60:IF X$= "T" THEN 410
+391 IF X$="F" THEN 440
+392 IF X$<> "T" AND X$ <> "F" THEN GOSUB 770: GOTO 390
+395 REM GODOWN CARGO CHOICE SUBROUTINE (400)
+400 VTAB 13:PRINT "MOVE WHAT ("TC$")? ": GOSUB 260:RETURN
+410 GOSUB 400:IF SG(X1) = 0 THEN VTAB 13:PRINT "YOU HAVE NO ";G$(X1);" ABOARD!        ": GOSUB 760:RETURN
+420 NUM$ = "":VTAB 13:PRINT A$:VTAB 13:PRINT " MOVE HOW MUCH ";G$(X1);"? ";: GOSUB 310:IF X$ = "A" THEN INVERSE:PRINT CHR$ (8) ;"ALL"; :NUM = SG(X1) :NORMAL
+421 IF X$ <> "A" THEN NUM = VAL (NUM$)
+425 HTAB 1
+430 IF NUM > SG(X1) THEN VTAB 13: PRINT " ONLY ";:Q = SG(X1):GOSUB 1330:HTAB 11:PRINT " UNITS ABOARD!    ": GOSUB 760:GOTO 420
+431 IF NUM < = SG(X1) THEN SG(X1) = SG(X1) - NUM: SH = SH + NUM:GG(X1) = GG(X1) + NUM: NUM$ = "":RETURN
+440 GOSUB 400:IF GG(X1) =0 THEN VTAB 13:PRINT " THE GODOWN HAS NO ";G$(X1);".           ": GOSUB 760:RETURN
+450 NUM$ = "": VTAB 13:PRINT B$;:HTAB 1:PRINT " MOVE HOW MUCH " ;G$(X1);" TO SHIP? ";: GOSUB 310:IF X$ = "A" THEN PRINT CHR$ (8);:INVERSE:PRINT "ALL" ;:NORMAL:NUM = GG(X1)
+451 IF X$ <> "A" THEN NUM = VAL (NUM$)
+460 IF NUM > GG(X1) THEN VTAB 13: PRINT " JUST ";:Q = GG(X1): GOSUB 1330:PRINT " UNITS STORED!":GOSUB 760: GOTO 450
+461 IF NUM < = GG(X1) THEN GG(X1) =GG(X1) - NUM: SG(X1) = SG(X1) + NUM:SH=SH- NUM:NUM$= "":RETURN
+465 REM LENDER SUBROUTINE (470-580)
+470 GOSUB 130: GOSUB 1340:VTAB 12:PRINT "[WANCHAI DISTRICT OF HONGKONG: HOME OF "; W$;"]":PRINT W$;" GREETS YOU, TAIPAN, AND WISHES YOU WELL.":GOSUB 780:VTAB 14:PRINT A$:PRINT A$
+480 VTAB 14:PRINT "WU STATES THAT HIS IRON LOTUS": PRINT "TRIAD HAS BEEN WATCHING YOU.": GOSUB 780
+490 VTAB 14: PRINT A$: PRINT A$: PRINT A$:VTAB 14:PRINT W$;" ASKS, DO YOU":PRINT A$;:VTAB 15:PRINT "WISH TO B)ORROW, P)AY, OR Q)UIT?    ";: NUM$ = ""
+500 GOSUB 60:IF X$ = "B" THEN LD$ = "BORROW": LD = 1
+501 IF X$ = "P" THEN LD$ = "PAY": LD = 2
+502 IF X$ = "Q" THEN PRINT: GOSUB 1340:RETURN
+503 IF X$ <> "B" AND X$ <> "P" AND X$ <> "Q" THEN GOSUB 770: GOTO 500
+510 IF LD = 1 AND (B = 1 OR D > 1E4) THEN GOSUB 1340: VTAB 15:PRINT "WU REGRETS THAT HE CANNOT LOAN": PRINT "YOU MORE AT THIS TIME, TAIPAN.";: GOSUB 760:GOTO 490
+520 GOSUB 1340: VTAB 15:PRINT "HOW MUCH DO YOU WISH TO ";LD$;",":PRINT "TAIPAN? ";:GOSUB 310:NUM = VAL (NUM$)
+530 IF X$ = "A" AND LD = 1 THEN PRINT CHR$ (8);: INVERSE:PRINT "ALL"; : NORMAL:NUM = C * 2
+531 IF X$ = "A" AND LD = 2 THEN PRINT CHR$ (8);: INVERSE:PRINT "ALL";: NORMAL:NUM = D
+540 IF LD = 2 THEN 560
+541 IF NUM > 2 * C THEN VTAB 15: PRINT A$:VTAB 15:PRINT W$;" REGRETS THAT HE":PRINT "CANNOT LOAN YOU THAT MUCH.";: GOSUB 760:GOTO 490
+550 B=1:C = C + NUM:D = D + NUM: GOSUB 130: GOTO 490
+560 IF NUM > C THEN NUM = C: D = D - C:C=0:GOSUB 130:VTAB 15:PRINT W$;" THANKS YOU,":PRINT "TAIPAN, FOR THE PAYMENT.";: GOSUB 780:IF D < 0 THEN D = 0:GOSUB 130:GOTO 490
+561 IF NUM > C AND D > = 0 THEN GOSUB 130: GOTO 490
+570 IF NUM > D THEN D = 0: C = C - NUM:VTAB 15:PRINT W$;" THANKS YOU FOR YOUR STARTLING GENEROSITY!";:GOSUB 130:GOSUB 780:GOTO 490
+580 C = C - NUM: D = D - NUM:GOSUB 130:VTAB 15:PRINT W$;" ACCEPTS YOUR PAYMENT WITH GRATITUDE, TAIPAN";:GOSUB 780: GOTO 490
+585 REM RANDOMIZER SUBROUTINE (590-591)
+590 PRINT TAB(8)"PRESS <";: FLASH=1:PRINT "SPACEBAR";: NORMAL=1:PRINT "> TO START"; : GOSUB 60:IF X$ = " " THEN RETURN
+591 X = INT ( RND (1) * 9) + 1: GOTO 590
+595 REM RECORDS SUBROUTINE (600-721)
+600 HOME: INVERSE:PRINT A$;:NORMAL:PRINT "    RECORDS OF HIGH & LOW PRICES":INVERSE:PRINT A$;:NORMAL:PRINT:PRINT "    RECORDS BY P)ORT OR I)TEM? ": PRINT"    __________________________"
+601 VTAB 10: PRINT "    PRESS <SPACEBAR> WHEN FINISHED":PRINT: INVERSE: PRINT A$: NORMAL
+610 GOSUB 60:IF X$ = "P" THEN GOSUB 720: GOTO 620
+611 IF X$ = "I" THEN PRINT: VTAB 5:PRINT A$;: PRINT A$: GOSUB 660: GOTO 670
+612 IFX$=" "THENHOME: RETURN
+613 IFX$<>"P"ANDX$<>"I" AND X$ <> " " THEN GOSUB 770: GOTO 610
+620 GOSUB 60:IF ASC (X$) > 47 AND ASC (X$) < 58 THEN X = VAL(X$)
+621 IF ASC (X$) < 48 OR ASC (X$) > 57 THEN GOSUB 770:GOTO 620
+630 HOME:PRINT " ";L$(X);" PRICES (VISITS:";V(X);")": INVERSE:PRINT " ITEM              HIGH         LOW     ";:NORMAL:FOR I = 0 TO 5:PRINT " ";G$(I);:HTAB 21
+640 IF H(X,I) = 0 THEN PRINT " ?";: HTAB 30:INVERSE: PRINT " ";: NORMAL: PRINT "   ?": NEXT I
+641 IF H(X,I) <> 0 THEN HTAB 21: PRINT H(X,I);:HTAB 30: INVERSE: PRINT " ";: NORMAL: PRINT " ";L(X,I): NEXT I
+650 INVERSE: PRINT A$:NORMAL: GOTO 700
+660 VTAB 5:FOR I = 0 TO 5:PRINT " ";G$(I),:NEXT I:PRINT:PRINT " WHAT ITEM (";TC$; "  ?": PRINT:PRINT A$:INVERSE: PRINT A$: NORMAL: GOSUB 260: RETURN
+670 HOME:PRINT " ";G$(X1);"  PRICES": INVERSE:PRINT " PORT      VISITS     HIGH    LOW       ";:NORMAL:FOR I = 0 TO 9:PRINT L$(I);
+680 VTAB I+3: HTAB 12:PRINT V(I);:IF L(I,X1) = 0 THEN HTAB 21: INVERSE: PRINT " ";: NORMAL:PRINT "  ?";: HTAB 32:PRINT "?":NEXT I:GOTO 690
+681 IFL(I,X1)<>0 THEN HTAB21: INVERSE:PRINT " ";:NORMAL:PRINT "  ";H(I,X1) ;: HTAB 31:PRINT " ";L(I,X1): NEXT I
+690 INVERSE: PRINT A$:NORMAL
+700 PRINT " PRESS <SPACEBAR> WHEN FINISHED";
+710 GOSUB 60:IF X$ = " " THEN 600
+711 GOTO 710
+715 REM PORT CHOICE SUBROUTINE (720)
+720 FORI=0TO9STEP2: VTAB (I / 2) + 4:PRINT A$:VTAB (I / 2) + 4: PRINT I;" ";L$(I);: HTAB 20:PRINT I + 1;" ";L$(I+1):NEXT I:PRINT
+721 PRINT "       WHICH PORT (0-9)?             ": PRINT:INVERSE: PRINT A$: NORMAL: RETURN
+725 REM EMBARK (730-751)
+730 IF SH < 0 THEN PRINT "YOUR SHIP IS OVERLOADED, TAIPAN         ";: PRINT A$:GOSUB 760:GOTO 360
+731 PRINT TAB( 11);:INVERSE=1:PRINT "EMBARKING":NORMAL=1:PRINT TAB( 9);"FROM " ;L$ (L ) : INVERSE=1:PRINT A$:NORMAL=1:FOR I = 0 TO 9:IF L = I THEN NEXT I:GOTO 740
+732 IF L <> I THEN PRINT TAB( 10);I;" ";L$(I): NEXT I
+740 PRINT: PRINT:INVERSE=1:PRINT A$:NORMAL=1:PRINT "WHAT PORT O' CALL, TAIPAN (0-9)?"
+750 GOSUB 60:IF ASC (X$) > 47 AND ASC (X$) < 58 AND VAL (X$) <> L THEN PO = VAL (X$) : GOTO 980
+751 GOSUB 770: GOTO 750
+755 REM NO CAN DO SUBROUTINE (760)
+760 PRINT "^G": GOSUB 780:RETURN
+765 REM INPUT ERROR SUBROUTINE (770)
+770 PRINT "^G";: RETURN
+775 REM DELAY SUBROUTINE (780-783)
+780 POKE -16368,0
+781 FOR I=0 TO 250
+782 IF PEEK ( -16364) > 127 THEN POKE -16368,0:RETURN
+783 NEXT I: RETURN
+785 REM EVENTS SUBROUTINE (790-851)
+790 IF K = 1 THEN RETURN
+791 K=1:X = 50 + INT ( RND (1) * 100) + 1: GN = INT ( RND (1) * 3) +1:XP = (X + (GN * 50)) * 100:IF C < XP OR RND (1) < .75 THEN 805
+792 GOSUB 1340: VTAB 12:PRINT " A BROKER OFFERS TO TAKE YOUR": PRINT "VESSEL IN TRADE FOR ONE WITH":PRINT GN + G;" GUNS & ";X + MW;" CAPACITY"
+800 PRINT "FOR ";XP;" IN CASH. WILL YOU": PRINT " ACCEPT (<Y> OR <N>)?";:GOSUB 60:VTAB 12:IF X$ = "Y" THEN C = C - XP:SH = SH + X:MW = MW + X:G = G + GN: GOSUB 130
+805 GOSUB 1340
+810 IF C > D AND D > 2000 AND RND (1) > .7 THEN GOSUB 1340:VTAB 12:PRINT "YOU'VE BEEN ATTACKED AND ROBBED BY IRON LOTUS RUFFIANS, TAIPAN!" ; : C = INT (C / 3) :GOSUB 760:GOSUB 130
+820 GOSUB 180: GOSUB 860: GOSUB 190:GOSUB 1340:DN = INT ((C / 2) * RND (1)):IF RND (1) > .8 AND TR = 0AND L <> 0 THEN VTAB 12:PRINT "A MESSENGER FROM ";LY$;" ASKS": PRINT "THAT YOU RETURN TO HONG KONG"
+821 IF RND (0) > .8 AND TR = 0 AND L <> 0 THEN PRINT "WITHOUT DELAY, TAIPAN." :GOSUB 780
+830 IF C > 100 AND TR = 0AND L = 0 THEN GOSUB 1340:PRINT YS$;", LIEUTENANTS":PRINT "OF THE MARINER, ";LY$;", ASK IF": PRINT "YOU WILL DONATE ";:Q = DN:GOSUB 1330:PRINT:PRINT "TO THE TEMPLE OF TIN HAU, THE"
+831 IF C > 100 AND TR = 0 AND L = 0THEN PRINT "SEA GODDESS. (Y) OR (N)"
+840 IF C > 0 AND TR = 0 AND L = 0 THEN GOSUB 60: IF X$ = "Y" OR X$ = "y" THEN C = C - DN:TR = 1:GOSUB 130:GOSUB 1340:PRINT " ":PRINT " " ;YS$;" THANK": PRINT " YOU, AND DEPART.": PRINT:PRINT A$;
+841 IF C > 0 AND TR = 0 AND L = 0THEN IF X$ <> "Y" AND X$ <> "y" THEN GOSUB 1340: PRINT " ":PRINT " ";YS$;" DEPART":PRINT "ABRUPTLY IN A CHILLY SILENCE.": PRINT A$;
+850 IF(TR=0 AND L=0) OR X$ = "Y" AND L = 0 THEN PRINT: PRINT A$;:GOSUB 780:PRINT A$:PRINT:PRINT
+851 RETURN
+855 REM BEARS 'N' BULLS SUBROUTINE (860-910)
+860 I = INT ( RND (1) * 6)
+870 IF RND (1) < .85 THEN RETURN
+880 GP(I) = INT (GP(I) * ( RND (1) * 4) + .5)
+890 PRINT L$(L);" MARKET FORCES HAVE": PRINT "DRIVEN ";G$(I);" PRICES TO ";:PRINT GP(I);: PRINT "!";
+900 GOSUB 780
+910 RETURN
+975 REM VOYAGE (980-1290)
+980 PRINT:INVERSE=1:PRINT A$;:NORMAL=1:PRINT " SEA VOYAGE FROM ";L$(L) : PRINT " TO ";L$(PO) :INVERSE=1: PRINT A$: NORMAL=1: GOSUB 780: ET = ABS (LO(L) - LO(PO))
+981 IF INT ( RND (1) * 50) + 1 >INT ( RND (1) * ET) + 1 THEN 1290
+985 REM STORM (990-1022)
+990 IF RND (1) > .5 THEN 1030
+991 PRINT B$;:PRINT " STORM, TAIPAN!" : GOSUB 760
+1000 IF RND (1) > .2 THEN 1020
+1001 PRINT " ANY PORT IN A STORM,                 ": GOSUB 760:PO = INT ( RND (1) * 10) :IF PO = L THEN PRINT" WE CAN'T MAKE IT,                      TAIPAN,            ": SR = 0:GOTO 1090
+1010 PRINT " WE'RE HEADED                           FOR SHELTER,          ": GOSUB 780
+1020 PRINT " WE RODE OUT THE                        STORM, TAIPAN!       ": GOSUB 780
+1021 IF RND (1) > .5 THEN 990
+1022 GOTO 1290
+1025 REM PIRATES (1030-1281)
+1030 ID = INT ( RND (1) * 2) + 1:GOSUB 5290:P = INT ( RND (1) * (MW / 25) * 2 ^ (ID*2)) * INT ( RND (1) * 3) + 1:PRINT P;" PIRATE CRAFT SIGHTED!": GOSUB 780:GOSUB 1100
+1040 IF ID = 1 THEN PRINT " LOOKS LIKE INDEPENDENT PIRATES.": GOSUB 780
+1041 IF ID <> 1 THEN PRINT B$;:PRINT" THERE'S ";LY$;"'S BANNER!": GOSUB 780
+1050 GOSUB 1100:IF ID = 1 AND RND (1) > .95THEN PRINT B$;:PRINT " ";LY$;"'S FLEET DROVE 'EM OFF!": GOSUB 6100:P = P * INT ( RND (1) * 10) + 6:ID = 2:GOSUB 5290:GOSUB 1100:IF TR = 0 THEN 1070
+1060 IF ID = 2 AND TR = 1 THEN PRINT "THEY GREET US, AND SAIL OFF.    ": GOSUB 6100:P=0:GOSUB 780:IF RND (1) > .8 THEN 1030
+1061 IF ID = 2 AND TR = 1 THEN 1290
+1070 IF CR = 0 AND TR = 0 AND ID = 2 THEN CR = 1: PRINT B$;:HTAB 1:PRINT " ";YS$;" ARE CURSING US!": GOSUB 780
+1080 PRINT "  THEY'RE FIRING ON US!          ": GOSUB 5380
+1081 IF INT ( RND (1) * P) + 1 >INT ( RND (1) * 5) + 1 THEN GOSUB 5540: PRINT B$;:PRINT " THE BUGGERS HIT US!":SR = SR - ( RND (1) /(MW / ( INT ( RND (1) * 50) + 1))): GOSUB 780:GOSUB 1100:GOTO 1090
+1082 PRINT " MISSED US, TAIPAN!        ": GOSUB 780
+1090 IF SR < .1 THEN GOSUB 780: PRINT " WE'RE GOING UNDER, TAIPAN!      ": GOSUB 6290:X$= "":GOTO 1300
+1091 GOTO 1120
+1095 REM SHIP STATUS SUBROUTINE (1100-1110)
+1100 INVERSE=1: PRINT A$;:NORMAL=1:PRINT " GUNS: ";G;"         REPAIR:";:IF SR<0THENSR=0
+1110 PRINT INT (SR * 100);"%  ":PRINT "SHIPS ENCOUNTERED:";P;"       ": PRINT A$;:PRINT A$;:PRINT A$;:RETURN
+1120 PRINT " SHALL WE R)UN, F)IGHT, OR P)ARLEY?": GOSUB 60:IF X$ = "R" THEN X = 1
+1121 IF X$ = "F" THEN X = 2
+1122 IF X$ = "P" OR X$ = "p" THEN X = 3
+1123 IF X$ <> "R" AND X$ <> "F" AND X$ <> "P" AND X$ <> "r" AND X$ <> "f" AND X$ <> "p" THEN GOSUB 770:GOTO 1120
+1130 ON X GOTO 1140,1160,1200
+1140 IF SR < = RND (1) AND INT ( RND (1) * 6) + 1 < = INT ( RND (1) * P) + 1 THEN 1150
+1141 IF SR > RND (1) AND INT ( RND (1) * 6) + 1 > INT ( RND (1) * P) + 1 THEN 1143
+1142 GOTO 1150
+1143 GOSUB 6220: PRINT "WE ESCAPED FROM 'EM TAIPAN!         ": P=0:GOSUB 780:GOSUB 1100:IF RND (1) > .8 THEN 1030
+1144 GOTO 1290
+1150 IF SR > RND (1) AND RND (1) > .6 THENP = P - INT ( INT (( RND (1) * P) + 1) / 2):GOSUB 6220:GOSUB 5290:PRINT P;" OF 'EM STILL WITH US!                         ":GOSUB 780: GOSUB 1100: GOTO 1050
+1151 PRINT " CAN'T SHAKE 'EM!                               ":GOSUB 780: GOTO 1050
+1152 REM ***TYPO*** END 1151, NO ':' NEEDED
+1160 PRINT " WE'RE FIRING ON 'EM!               ":GOSUB 5540:IF INT ( RND (1) * (G + 1)) + 1 > INT (RND (1) * 4)THEN PRINT B$;:HTAB 1:PRINT "HIT 'EM!":GOSUB 5680:GOTO 1170
+1161 PRINT " MISSED 'EM!                        ":GOSUB 780: GOTO 1190
+1170 NK = RND (1):IF NK > .4 THEN IF P >= G THENX = INT ( INT (( RND (1) * (G - 1)) + 1) / 3) + 1
+1171 IF NK > .4 AND P < G THEN X = INT ( RND (1) * P)+1
+1172 IF NK <= .4 THEN PRINT " THEY'RE STILL AFLOAT.": GOSUB 780:GOTO 1190
+1180 P=P-X: PRINT " SANK ";X;" OF 'EM, TAIPAN!": GOSUB 5830:IF P > 0 THEN GOSUB 5290
+1190 GOSUB 1100:IF P = 0 THEN IF RND (1) > .5 THEN 1270
+1191 IF P = 0 THEN PRINT " THAT'S ALL FOR THE BUGGERS!": GOSUB 780:IF RND (1) > .8 THEN 1030
+1192 IF P = 0 THEN 1290
+1193 GOSUB 780: GOTO 1050
+1200 IF RND (1) < .8 THEN PRINT " THEY REFUSE TO PARLEY, TAIPAN.       ": GOSUB 780:GOTO 1050
+1201 PRINT " THEY AGREE TO DISCUSS TERMS.         ": GOSUB 780
+1210 IF P > G / 2 OR RND (1) > .7 THEN PRINT " THEY OFFER TO LET US GO IN EXCHANGE FOR";:PRINT "ALL OUR CASH. DO WE ACCEPT, TAIPAN (Y/N)";: GOTO 1220
+1211 GOTO 1240
+1220 GOSUB 60: PRINT A$;:PRINT A$;:IF X$ = "Y" OR Y$ = "y" THEN IF RND (1) > .2 AND C> 100 + INT ( RND (1) * 2000) THEN P =0:C=0:PRINT " THEY TOOK IT & RAN!": GOSUB 780:GOSUB 1100:GOTO 1280
+1221 IF X$ <> "Y" AND X$<>"y" THEN 1050
+1222 C=0: PRINT " THEY STILL INTEND TO FIGHT!": PRINT:PRINT A$;:GOSUB 780
+1230 GOSUB 780: GOTO 1050
+1240 PRINT TAB(13)SFL$;:PRINT " THEY OFFER TO SURRENDER.     ":GOSUB 780:PRINT " DO WE LET THEM GIVE UP (Y/N)?     ":GOSUB 60:IF X$ = "Y" THEN 1260
+1250 IF RND (1) > .5 AND P > 0THEN E = INT ( RND (1) * P) + 1: P=P-E:GOSUB 6100:PRINT B$; :PRINT E;" OF 'EM RAN AWAY!": GOSUB 780:GOSUB 1100:GOSUB 5290:GOTO 1050
+1260 IF RND (1) > .7 THEN PRINT " THEY'RE PREPARING TO ATTACK!   ":GOSUB 780:GOTO 1050
+1265 REM CAPTURE (1270-1281)
+1270 PRINT " WE'VE CAPTURED A BIGGER SHIP!" : GOSUB 760:PRINT " WE'RE TRANSFERRING TO IT NOW.": GOSUB 780:G = G + INT ( RND (1) * (G + 1)) + 1:E = SH + INT ( RND (1) * (SH + 150)) + 1: SH = SH + E:MW = MW + E:P=0
+1280 IF SR < .1 THEN 1300 
+1281 IF P > 0 THEN 1050 
+1285 REM ARRIVAL (1290)
+1290 CR = 0: SR = 1:L=PO:V(L) = V(L) + 1: B=0:K=0:GOSUB 160:PRINT:INVERSE=1:PRINT A$;: NORMAL=1: PRINT " ARRIVING "; L$(L);" AFTER": PRINT " A VOYAGE OF ";ET;" DAYS.": INVERSE=1:PRINT A$:NORMAL=1: GOSUB 780:GOTO 120
+1295 REM THAT'S ALL FOLKS (1300-1321)
+1300 NW = C - D:Q = NW / GT: INVERSE=1: PRINT A$;: NORMAL=1: PRINT:PRINT "YOUR SCORE, BASED UPON TIME AND YOUR": PRINT "NET WORTH (EXCLUDING STOCK) IS ";: GOSUB 1330:INVERSE=1: PRINT A$: NORMAL=1
+1310 IF X$ = "R" THEN PRINT "WOULD YOU LIKE TO PICK UP THIS":PRINT"GAME WHERE YOU LEFT OFF (Y/N)?": GOSUB 60:IF X$ = "Y" THEN GOTO 120
+1320 GOSUB 1340: PRINT A$: PRINT "DO YOU WISH TO START OVER (Y/N)?": GOSUB 60:IF X$ = "Y" THEN RUN
+1321 END
+1325 REM BIG NUMBER SUBROUTINE (1330-1370)
+1330 IF ABS (Q) < 1E6 THEN PRINT INT (Q);: NORMAL=1:PRINT "   ";: RETURN
+1331 IF ABS (Q) < 1E9 THEN Q = Q / 1E6: Q$ = "MIL":GOTO 1335
+1332 IF ABS (Q) < 1E12 THEN Q = Q / 1E9: Q$ = "BIL":GOTO 1335
+1333 IF ABS (Q) > = 1E12 THEN Q = Q / 1E12: Q$ = "TRL":GOTO 1335
+1335 PRINT INT (Q);Q$;: NORMAL=1:PRINT "      ";
+1337 RETURN
+1338 REM CLEANUP SUBROUTINE (1340-1370)
+1340 FOR I = 12 TO 18
+1345 
+1350 PRINT A$;
+1360 NEXT I
+1365 PRINT
+1370 RETURN
+4995 REM SEA ACTION SUBROUTINES (5000-6360)
+4997 REM GRAPHICS INITIALIZATION (5000-5120)
+5000 DIM CH$(14),CN$(14 )
+5005 FOR V1 = 0 TO 12
+5010 READ CH$(V1)
+5020 CN$(V1) = CH$(V1)
+5030 NEXT V1
+5040 DATA    "          :             "
+5050 DATA    "       -------          "
+5060 DATA    "       -------    \:    "
+5070 DATA    " :/    -------    \\    "
+5075 DATA    " //    -------    \\\   "
+5080 DATA    "///    -------    \\\   "
+5085 DATA    "///    -------     \\   " 
+5090 DATA    "///    -------     :\   " 
+5100 DATA    "//     -------     :    "
+5105 DATA    "/:     -------    -:-   "
+5110 DATA    " :--      :      :000:  "
+5111 DATA    ":   \------------/   /  "
+5112 DATA    " \                  /   "
+5120 RETURN
+5290 REM PIRATES ARRIVE (5300-5370)
+5295 goto 5370:rem cp/m has no animation
+5300 GOSUB 5950
+5305 IF ID <> 1 THEN CH$(0) = "       ===:          "
+5310 FOR A = 1 TO 10: VTAB 1:PRINT A$;:NEXT A
+5320 FOR A = 1 TO 30
+5340 FOR B = 0 TO 13
+5350 VTAB B+1: HTAB40-A:PRINT LEFT$ (CH$(B),A),;" ";
+5360 NEXT B: NEXT A
+5370 RETURN
+5380 REM PIRATES FIRE (5360-5440)
+5390 FORA=1TOINT(RND(1)*6) + 1
+5410 A1 = INT ( RND (1) * 10) + 1
+5420 IF A1 = 5 THEN 5410
+5430 HTAB 16 + A1: VTAB 11:PRINT "*"
+5432 PRINT "^G"
+5433 HTAB 16 + A1: VTAB 11:PRINT " "
+5435 NEXT A
+5440 RETURN
+5540 REM CANNON HIT (5550-5560)
+5550 PRINT "^G"
+5560 RETURN
+5680 REM DAMAGE 'EM (5730-5760)
+5730 I = INT ( RND (1) * 17) + 2: I1 = INT ( RND (1) * 9) + 2
+5740 CH$(I1) = LEFT$ (CH$(I1),I - 1) + " " + MID$ (CH$(I1) , I + 1, LEN (CH$(I1)))
+5750 HTAB 10: VTABI1+1: PRINT CH$(I1)
+5755 GOSUB 780
+5760 RETURN
+5830 REM PIRATES SINK (5840-5940)
+5835 goto 5940:rem cp/m has no animation
+5840 FOR A = 0 TO 12
+5850 VTAB A+1: PRINT A$;
+5870 FOR A1=0 TO 12-A
+5880 VTAB 2+A+A1: HTAB 10:PRINT CH$(A1)
+5890 NEXT A1
+5910 NEXT A
+5920 VTAB 14: PRINT A$;
+5930 GOSUB 5950
+5940 RETURN
+5950 REM REPAIR DAMAGE (5960-5990)
+5960 FOR A = 0 TO 13
+5970 CH$(A)= CN$(A)
+5980 NEXT A
+5990 RETURN
+6100 REM PIRATES DEPART (6110-6210)
+6105 goto 6210:rem cp/m has no animation
+6110 FOR A = 9 TO 0 STEP -1
+6130 FOR B = 0 TO 13
+6140 HTAB A+ 1: VTABB+1:PRINT CH$(B);" "
+6150 NEXT B: NEXT A
+6160 FOR A = 22 TO 1 STEP -1
+6180 FOR B = 0 TO 13
+6190 HTAB 1: VTABB+1:PRINT RIGHT$ (CH$ (B) ,A) ;" "
+6200 NEXT B: NEXT A
+6210 RETURN
+6220 REM WE PULL AWAY (6230-6280)
+6225 goto 6260:rem cp/m has no animation
+6230 FOR A = 30 TO 1 STEP -1
+6250 FOR B = 0 TO 13
+6260 RETURN
+6270 NEXT B: NEXT A
+6290 REM WE'RE SUNK! (6300-6360)
+6295 goto 6360:rem cp/m has no animation
+6300 FOR A = 1 TO 17
+6310 FOR B = 1 TO 100: NEXT B
+6320 VTAB24:HTAB INT ( RND (1) * 40) + 1: PRINT "O"
+6350 NEXT A
+6360 RETURN
