@@ -523,6 +523,33 @@ Lines:
  - 451, 991, 1041, 1051, 1052, 1070, 1081?, 1082, 1162?, 
 1162, 1252 	
 
+#### REM out the animations
+
+Lines:
+
+ - 5295, 5835, 6105, 6225, 6295
+
+```none
+5290 rem pirates arrive (5300-5370)
+5295 goto 5370:rem cp/m has no animation
+
+5830 rem pirates sink (5840-5940)
+5835 goto 5940:rem cp/m has no animation
+
+6100 rem pirates depart (6110-6210)
+6105 goto 6210:rem cp/m has no animation
+
+6220 rem we pull away (6230-6280)
+6225 goto 6260:rem cp/m has no animation
+
+6290 rem we're sunk! (6300-6360)
+6295 goto 6320:rem cp/m has no animation
+```
+
+#### Excessive blank lines
+
+TODO: Where?
+
 ## Finished?
 
 The game is now, more or less, playable.
@@ -537,8 +564,9 @@ The game is now, more or less, playable.
  - Need to redraw ship with the cannon ball holes already, as there is no `PRINT AT`
    - Or redraw the whole ship for each shot, adding the new and existing shots, *whilst* drawing each line, by adding the shots on the appropriate line. 
  - Implement a delay routine, with configurable processor speed
- - Remove pirates arrival – can not do the left scroll.
- - Remove sinking ship - can not do down scroll.
+ - Remove pirates arrival – can not do the left scroll. - DONE!
+ - Remove sinking ship - can not do down scroll. - DONE!
+ - Still way too many blank lines, in clumps
 
 
   [1]: https://taipangame.com/pdf/TaipanAHistoricalAdventureForTheAppleComputerAppleIIEdition.pdf
