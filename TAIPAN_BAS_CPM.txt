@@ -12,7 +12,7 @@
 
  - tba
 
-### Strip the duplicates and blank lines
+### Strip the duplicate and blank lines
 
 ```none
 perl -ane '$a[$F[0]] = $_ if ($F[0] =~ m/^\d+$/); END {print @a}' TAIPAN_BAS_CPM.txt
@@ -307,6 +307,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 420 num$="":printa$:print tab 13 " move how much ";g$(x1);"? ";
 420 num$="":print a$:print tab 13 " move how much ";g$(x1);"? ";
 421 gosub305:if x$="a" then invers=1:print chr$(8);"all";:num = sg(x1):nrmal=1
+421 gosub 305:if x$="a" then invers=1:print chr$(8);"all";:num = sg(x1):nrmal=1
 422 if x$ <> "a" then num = val (num$)
 425 rem tab(1)
 430 if num > sg(x1) then locate 13: print " only ";:q = sg(x1):gosub 1330
@@ -630,6 +631,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 825 if rnd(0)>.8andtr=0 and l<>0 then print "without delay, taipan.":gosub780
 825 if rnd(0)>.8 and tr=0 and l<>0 then print "without delay, taipan.":gosub780
+825 if rnd(0)>.8 and tr=0 and l<>0 then print "without delay, taipan.":gosub 780
 
 821 dice = rnd(1)>.8andtr=0andl<>0
 821 dice = rnd(1)>.8 and tr=0 and l<>0
@@ -642,6 +644,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 823 if dice then print "that you return to hong kong"
 
 825 if dice then print "without delay, taipan.":gosub780
+825 if dice then print "without delay, taipan.":gosub 780
 
 829 rem positive logic
 830 ifc>100andtr=0andl=0 then gosub 1340:locate12:print ys$;", lieutenants"
@@ -653,6 +656,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 833 ifc>100andtr=0andl=0 then print "to the temple of tin hau, the"
 835 ifc>100andtr=0andl=0 then print "sea goddess. (y) or (n)"
 840 ifc>0andtr=0andl=0thengosub60
+840 if c>0 and tr=0 and l=0 then gosub 60
 841 ifc>0andtr=0andl=0thenifx$="y"thenc=c-dn:tr=1:gosub 130
 842 ifc>0andtr=0andl=0thenifx$="y"thengosub 1340:locate12,1:print " "
 842 ifc>0andtr=0andl=0thenifx$="y"thengosub 1340:tab12:print " "
@@ -794,6 +798,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 1051 if id=1 and rnd(1)>.95then print b$;:print " ";ly$;
 1051 if id=1 and rnd(1)>.95then print b$:print " ";ly$;
 1052 ifid=1andrnd(1)>.95thenprint"'s fleet drove 'em off!":gosub6100
+1052 ifid=1andrnd(1)>.95thenprint"'s fleet drove 'em off!":gosub 6100
 1053 ifid=1andrnd(1)>.95thenp=p*int(rnd(1)*10)+6:id=2:gosub 5290:gosub 1100
 1054 ifid=1andrnd(1)>.95thenif tr = 0 then 1070
 
@@ -837,6 +842,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 1081 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thengosub5540:tab19:print b$;
 1081 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then gosub5540:tab19:print b$;
 1081 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then gosub5540
+1081 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then gosub 5540
 1082 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thenprinttab(1)" the buggers hit us!"
 1082 if int(rnd(1)*p)+1>int(rnd(1)*5)+1 then print " the buggers hit us!"
 1083 ifint(rnd(1)*p)+1>int(rnd(1)*5)+1thensr=sr-(rnd(1)/(mw/(int(rnd(1)*50)+1)))
@@ -1118,6 +1124,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 
 5290 rem pirates arrive (5300-5370)
+5295 goto 5370:rem cp/m has no animation
 5300 gosub 5950
 5305 if id <> 1 then ch$(0) = "       ===:          "
 
@@ -1160,6 +1167,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 
 5830 rem pirates sink (5840-5940)
+6835 goto 5940:rem cp/m has no animation
 5840 for a = 0 to 12
 5850 locate a+1: print a$;
 5850 print a$;
@@ -1185,6 +1193,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 
 6100 rem pirates depart (6110-6210)
+6105 goto 6210:rem cp/m has no animation
 6110 for a = 9 to 0 step -1
 6130 for b = 0 to 13
 6140 locate b+1,a+ 1:print ch$(b);" "
@@ -1199,6 +1208,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 
 6220 rem we pull away (6230-6280)
+6225 goto 6260:rem cp/m has no animation
 6230 for a = 30 to 1 step -1
 6250 for b = 0 to 13
 6260 locateb+1,40-a:print " "; left$ (ch$(b),a); chr$ (8);" ";
@@ -1209,11 +1219,13 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 
 6290 rem we're sunk! (6300-6360)
+6295 goto 6320:rem cp/m has no animation
 6300 for a = 1 to 17
 6310 for b = 1 to 100: next b
 6320 locate24, int ( rnd (1) * 40) + 1: print "o"
 6320 tab( rnd (1) * 40) + 1: print "o"
 6320 print tab( rnd (1) * 40) + 1 "o"
+6320 print tab(( rnd (1) * 40) + 1) "o"
 
 
 6350 next a
