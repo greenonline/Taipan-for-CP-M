@@ -1167,7 +1167,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 
 
 5830 rem pirates sink (5840-5940)
-6835 goto 5940:rem cp/m has no animation
+5835 goto 5940:rem cp/m has no animation
 5840 for a = 0 to 12
 5850 locate a+1: print a$;
 5850 print a$;
