@@ -248,8 +248,9 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 421 IF X$ <> "A" THEN NUM = VAL (NUM$)
 421 IF X$ <> "A" AND X$ <> "a" THEN NUM = VAL (NUM$)
 425 HTAB 1
+425
 430 IF NUM > SG(X1) THEN VTAB 13: PRINT " ONLY ";:Q = SG(X1):GOSUB 1330:HTAB 11:PRINT " UNITS ABOARD!    ": GOSUB 760:GOTO 420
-430 IF NUM > SG(X1) THEN PRINT " ONLY ";:Q = SG(X1):GOSUB 1330:HTAB 11:PRINT " UNITS ABOARD!    ": GOSUB 760:GOTO 420
+430 IF NUM > SG(X1) THEN PRINT " ONLY ";:Q = SG(X1):GOSUB 1330:PRINT TAB(11)" UNITS ABOARD!    ": GOSUB 760:GOTO 420
 
 431 IF NUM < = SG(X1) THEN SG(X1) = SG(X1) - NUM: SH = SH + NUM:GG(X1) = GG(X1) + NUM: NUM$ = "":RETURN
 440 GOSUB 400:IF GG(X1) =0 THEN VTAB 13:PRINT " THE GODOWN HAS NO ";G$(X1);".           ": GOSUB 760:RETURN
@@ -680,7 +681,7 @@ From [Extracting last occurrence of line number from (BASIC) file](https://unix.
 5730 I = INT ( RND (1) * 17) + 2: I1 = INT ( RND (1) * 9) + 2
 5740 CH$(I1) = LEFT$ (CH$(I1),I - 1) + " " + MID$ (CH$(I1) , I + 1, LEN (CH$(I1)))
 5750 HTAB 10: VTABI1+1: PRINT CH$(I1)
-5750 HTAB 10: VTABI1+1: PRINT TAB(10) CH$(I1)
+5750 PRINT TAB(10) CH$(I1)
 5755 GOSUB 780
 5760 RETURN
 
