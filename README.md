@@ -210,7 +210,8 @@ The game may not be pretty, but it is playable
  - The market prices need to be redisplayed after buying and selling
  - The status is shown when first entering game, after spacebar, and then scrolls straight off the screen!
  - Check for any stragglers of `A$;` and `B$;`.
- - Maybe remove some `A$` and `B$`.
+ - Maybe remove some `PRINT A$` and `PRINT B$`.
+ - Game is the same every play, not randomised?
 
 
 
