@@ -197,6 +197,27 @@ I didn't make a note of the line numbers, maybe:
 
 This fix keeps everything within 40 columns now.
 
+#### Putting cargo and matket prices together
+
+The main display is at line 120, which calls the cargo display at line 130, and then jump to 220.
+
+220 displays the market prices, but before doing so, jumps to events (including temple donation):
+
+```none
+220 GOSUB 790: GOSUB 1340:INVERSE=1:PRINT TAB(8) " ";L$(L);" MARKET PRICES ":NORMAL=1:PRINT A$:FOR I = 0 TO 4 STEP 2: PRINT G$(I);: PRINT TAB(10) GP(I) ;: PRINT TAB(21) G$(I + 1);
+```
+
+The line needs to be changed so that the cargo display is called (again) just before the market prices. 
+
+So, line 220 becomes
+
+```none
+220 GOSUB 790: GOSUB 1340:GOSUB 130:INVERSE=1:PRINT TAB(8) " ";L$(L);" MARKET PRICES ":NORMAL=1:PRINT A$:FOR I = 0 TO 4 STEP 2: PRINT G$(I);: PRINT TAB(10) GP(I) ;: PRINT TAB(21) G$(I + 1);
+```
+
+Perfect!
+
+
 ### Playable?
 
 The game may not be pretty, but it is playable
@@ -209,7 +230,7 @@ The game may not be pretty, but it is playable
  - Implement a delay routine, with configurable processor speed
  - Still way too many blank lines, in clumps
  - The market prices need to be redisplayed after buying and selling
- - The status is shown when first entering game, after spacebar, and then scrolls straight off the screen!
+ - The status is shown when first entering game, after spacebar, and then scrolls straight off the screen! - DONE!
  - Check for any stragglers of `A$;` and `B$;`.
  - Maybe remove some `PRINT A$` and `PRINT B$`.
  - Game is the same every play, not randomised?
