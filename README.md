@@ -34,6 +34,7 @@ Most of the notes from the "weirdness" version apply here, I just didn't bother 
  - [CommanderX16Taipan](https://github.com/greenonline/CommanderX16Taipan)
  - [BBCTaipan](https://github.com/greenonline/BBCTaipan)
  - [PETTaipan](https://github.com/greenonline/PETTaipan)
+ - [QLTaipan](https://github.com/greenonline/Taipan-for-QL)
 
 ## Notes
 
