@@ -217,6 +217,55 @@ So, line 220 becomes
 
 Perfect!
 
+### Reprinting market prices after buy/sell 
+
+We need to split the events from the market prices display in line 220
+
+```none
+220 GOSUB 790: GOSUB 1340:GOSUB 130:INVERSE=1:PRINT TAB(8) " ";L$(L);" MARKET PRICES ":NORMAL=1:PRINT A$:FOR I = 0 TO 4 STEP 2: PRINT G$(I);: PRINT TAB(10) GP(I) ;: PRINT TAB(21) G$(I + 1);
+221 PRINT TAB(30) GP(I + 1) :NEXT I
+```
+
+to
+
+```none
+220 GOSUB 790
+221 GOSUB 1340:GOSUB 130:INVERSE=1:PRINT TAB(8) " ";L$(L);" MARKET PRICES ":NORMAL=1:PRINT A$:FOR I = 0 TO 4 STEP 2: PRINT G$(I);: PRINT TAB(10) GP(I) ;: PRINT TAB(21) G$(I + 1);
+222 PRINT TAB(30) GP(I + 1) :NEXT I
+```
+
+Next change the lines 280, 290, 341 and 351 to call line 221, instead of 230 (and remove superfluous calls to 130 in lines 341 and 351)
+
+```none
+280 IF X=1 AND GP(X1) > C THEN PRINT "YOU CAN'T AFFORD ANY ";G$(X1);". ";: GOSUB 760:GOTO 230
+290 IF X = 2 AND SG(X1) < 1 THEN PRINT "YOU HAVE NO ";G$(X1); " ABOARD!      ";: GOSUB 760:GOTO 230
+...
+341 IF X = 1 AND NUM * GP(X1) < = C THEN SG(X1) = SG(X1) + NUM: SH=SH- NUM:C = C - GP(X1) * NUM:GOSUB 130: GOTO 230
+...
+351 SG(X1) = SG(X1) - NUM: SH = SH + NUM:C = C + (NUM * GP(X1) ) : GOSUB 130:GOTO 230
+```
+
+to
+
+```none
+280 IF X=1 AND GP(X1) > C THEN PRINT "YOU CAN'T AFFORD ANY ";G$(X1);". ";: GOSUB 760:GOTO 221
+290 IF X = 2 AND SG(X1) < 1 THEN PRINT "YOU HAVE NO ";G$(X1); " ABOARD!      ";: GOSUB 760:GOTO 221
+...
+341 IF X = 1 AND NUM * GP(X1) < = C THEN SG(X1) = SG(X1) + NUM: SH=SH- NUM:C = C - GP(X1) * NUM:GOTO 221
+...
+351 SG(X1) = SG(X1) - NUM: SH = SH + NUM:C = C + (NUM * GP(X1) ) : GOTO 221
+```
+
+Finally, removing the last remaining superfluous cargo display call
+
+```none
+120 GOSUB 130: GOTO 220
+120 GOTO 220
+```
+
+
+
+
 
 ### Playable?
 
@@ -229,7 +278,7 @@ The game may not be pretty, but it is playable
    - Or redraw the whole ship for each shot, adding the new and existing shots, *whilst* drawing each line, by adding the shots on the appropriate line. 
  - Implement a delay routine, with configurable processor speed
  - Still way too many blank lines, in clumps
- - The market prices need to be redisplayed after buying and selling
+ - The market prices need to be redisplayed after buying and selling - DONE!
  - The status is shown when first entering game, after spacebar, and then scrolls straight off the screen! - DONE!
  - Check for any stragglers of `A$;` and `B$;`.
  - Maybe remove some `PRINT A$` and `PRINT B$`.
